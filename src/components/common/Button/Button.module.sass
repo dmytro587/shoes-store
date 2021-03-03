@@ -1,0 +1,74 @@
+@import "./../../../sass/variables"
+
+.button
+   min-width: 100px
+   padding: 10px 15px
+   display: inline-flex
+   align-items: center
+
+   color: $orange
+   letter-spacing: 1px
+   font-weight: 500
+
+   border: 2px solid $orange
+   border-radius: 25px
+   background-color: transparent
+
+   transition: background-color .25s linear, transfrom .25s ease, color .25s linear
+   cursor: pointer
+   &:hover
+      background-color: $orange
+      color: #fff
+      & .quantity
+         border-color:  #fff
+         background-color: transparent
+   &:active, &:focus
+      border-radius: 25px
+   &:active
+      transform: scale(.99)
+   & .quantity
+      margin-left: 5px
+      display: inline-flex
+      justify-content: center
+      align-items: center
+
+      min-width: 22px
+      height: 22px
+
+      border: 1px solid $orange
+      border-radius: 50%
+      font-size: .9rem
+      font-weight: 300
+      color: #fff
+      background-color: #FE5F1E
+      transition: border-color .25s linear, background-color .25s linear
+
+.fill, .outline
+   padding: 15px 35px
+   border-radius: 30px
+
+.fill
+   font-weight: 500
+   background-color: $orange
+   color: #fff
+   border: none
+   transition: background-color .25s linear, transfrom .25s ease
+   &:hover
+      background-color: darken($orange, 15%)
+
+.black
+   background-color: $black
+   &:hover
+      background-color: lighten($black, 20%)
+
+.outline
+   border: 1px solid #D3D3D3
+   background-color: transparent
+   font-weight: 300
+   color: #D3D3D3
+   transition: color .25s linear, background-color .25s linear
+   & > img
+      margin-right: 8px
+   &:hover
+      color: #fff
+      background-color: #D3D3D3
