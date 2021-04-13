@@ -1,0 +1,45 @@
+.wrapper
+   padding-top: 40px
+   display: flex
+   align-items: center
+   justify-content: center
+
+.button
+   margin: 0 3px
+   padding: 0 6px
+   min-width: 32px
+   height: 32px
+
+   font-size: 0.875rem
+   border-radius: 4px
+   background-color: #e7e7e79c
+
+   transition: background-color .15s linear
+   cursor: pointer
+   &.active
+      background-color: rgb(155, 155, 155)
+      &:hover
+         background-color: rgb(155, 155, 155)
+   &:hover
+      background-color: #cfcece9c
+
+
+.arrowBtn
+   @extend .button
+   margin: 0 10px
+   width: 32px
+   display: inline-flex
+   align-items: center
+   background-color: transparent
+   cursor: pointer
+   &:hover
+      background-color: #e7e7e79c
+   &:disabled
+      & > svg
+         opacity: .4
+   & > svg
+      width: 20px
+      height: 20px
+      transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms
+      user-select: none
+
