@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
+const helmet = require('helmet')
 
 const { PORT, MONGODB_URI } = require('./config')
 
@@ -9,6 +10,7 @@ const app = express()
 app.use(express.static(`${__dirname}/public`))
 app.use(express.json())
 app.use(cors())
+app.use(helmet())
 
 // Models
 require('./models/Product')
