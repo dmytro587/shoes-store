@@ -40,9 +40,9 @@ const cartReducer = (state = initialState, action) => {
 
       case SET_REMOVING_STATE: {
          let removing = [...state.removingState]
-         const { itemId, bool } = action.payload
+         const { itemId, isLoading } = action.payload
 
-         if (bool) removing.push(itemId)
+         if (isLoading) removing.push(itemId)
          else removing = removing.filter(id => id !== itemId)
 
          return {

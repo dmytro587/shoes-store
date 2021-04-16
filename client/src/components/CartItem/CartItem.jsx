@@ -1,4 +1,4 @@
-import { Loader } from '../index'
+import Loader from 'react-loader-spinner'
 
 import minusSvg from './../../assets/images/minus.svg'
 import plusSvg from './../../assets/images/plus.svg'
@@ -49,7 +49,13 @@ const CartItem = ({
          >
             {
                removingState.some(itemId => itemId === id)
-                  ? <Loader />
+                  ? <Loader
+                     className={ s.loader }
+                     type="Oval"
+                     width={30}
+                     height={30}
+                     color="#929292"
+                  />
                   : <img src={ removeSvg } alt=""/>
             }
          </button>

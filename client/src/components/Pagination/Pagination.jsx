@@ -1,8 +1,5 @@
 import cn from 'classnames'
-
 import * as s from './Pagination.module.sass'
-
-const noop = () => {}
 
 const range = (from, to) => {
    const res = []
