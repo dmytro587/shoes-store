@@ -1,4 +1,4 @@
-import { Loader, SizesList } from '../index'
+import { Loader } from '../index'
 
 import minusSvg from './../../assets/images/minus.svg'
 import plusSvg from './../../assets/images/plus.svg'
@@ -10,15 +10,12 @@ const CartItem = ({
    id,
    name,
    imgUrl,
-   sizes,
-   selectedSize,
    price,
    count,
    removingState,
    onRemoveItem,
-   onPlusItem,
-   onMinusItem,
-   onSelectSize
+   onPlusItemCount,
+   onMinusItemCount,
 }) => {
 
    return (
@@ -31,22 +28,15 @@ const CartItem = ({
 
             <div className={ s.info }>
                <h4>{ name }</h4>
-               <form>
-                  <SizesList
-                     sizes={ sizes }
-                     selectDefault={ selectedSize }
-                     onSelectSize={ size => onSelectSize(id, size) }
-                  />
-               </form>
             </div>
          </div>
 
          <div className={ s.counter }>
-            <button onClick={ () => onMinusItem(id) }>
+            <button onClick={ () => onMinusItemCount(id) }>
                <img src={ minusSvg } alt=""/>
             </button>
             <span>{ count }</span>
-            <button onClick={ () => onPlusItem(id) }>
+            <button onClick={ () => onPlusItemCount(id) }>
                <img src={ plusSvg } alt=""/>
             </button>
          </div>
@@ -58,7 +48,7 @@ const CartItem = ({
             onClick={ () => onRemoveItem(id) }
          >
             {
-               removingState.some(el => el.itemId === id)
+               removingState.some(itemId => itemId === id)
                   ? <Loader />
                   : <img src={ removeSvg } alt=""/>
             }

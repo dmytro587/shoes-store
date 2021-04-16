@@ -11,6 +11,7 @@
    text-decoration: none
 
 .basket
+   margin-left: 10px
    display: inline-flex
    padding: 12px 15px
 
@@ -37,3 +38,28 @@
          width: 1px
          height: 25px
          background-color: rgba(#fff, .5)
+
+.right
+   display: flex
+   align-items: center
+
+.separator
+   display: inline-block
+   width: 2px
+   height: 30px
+   background-color: #afafaf
+
+.logout
+   padding-right: 10px
+   text-decoration: none
+   cursor: pointer
+   transition: all .1s ease
+   &:hover
+      color: lighten(#000, 25%)
+
+.text
+   text-decoration: none
+   & > button
+      font-size: 1.2rem
+      color: #fff
+      font-weight: 400

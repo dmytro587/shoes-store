@@ -1,0 +1,1 @@
+export const INITIALIZE_SUCCESS = 'app/INITIALIZE_SUCCESS'

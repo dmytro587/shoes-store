@@ -1,4 +1,9 @@
-import { SET_IS_LOADING, SET_PRODUCTS, SET_PRODUCTS_ADDED_TO_CART } from '../actionTypes/products'
+import {
+   CLEAR_PRODUCTS,
+   SET_IS_LOADING,
+   SUCCESS_FETCHING_PRODUCTS,
+   ERROR_FETCHING_PRODUCTS
+} from '../actionTypes/products'
 import { fetchProducts as fetchProductsAPI } from '../../api/api'
 
 
@@ -7,18 +12,28 @@ const setIsLoading = bool => ({
    payload: bool
 })
 
-const setProducts = (items, totalCount) => ({
-   type: SET_PRODUCTS,
+const successFetching = (items, totalCount) => ({
+   type: SUCCESS_FETCHING_PRODUCTS,
    payload: { items, totalCount }
 })
 
-export const setProductsAddedToCart = obj => ({
-   type: SET_PRODUCTS_ADDED_TO_CART,
-   payload: obj
+const errorFetching = error => ({
+   type: ERROR_FETCHING_PRODUCTS,
+   payload: error
 })
+
+const clearProducts = {
+   type: CLEAR_PRODUCTS
+}
 
 export const fetchProducts = (filters, currentPage) => async (dispatch, getState) => {
    dispatch(setIsLoading(true))
+
+   const token = getState().auth.token
+
+   if (!token) {
+      dispatch(clearProducts)
+   }
 
    const pagination = {
       page: currentPage,
@@ -26,10 +41,10 @@ export const fetchProducts = (filters, currentPage) => async (dispatch, getState
    }
 
    try {
-      const { products, totalCount } = await fetchProductsAPI(filters, pagination)
-      dispatch(setProducts(products, totalCount))
+      const { products, totalCount } = await fetchProductsAPI(filters, pagination, token)
+      dispatch(successFetching(products, totalCount))
    } catch (e) {
-      console.log('fetchProducts', e)
+      dispatch(errorFetching(e.response.data))
       dispatch(setIsLoading(false))
    }
 }

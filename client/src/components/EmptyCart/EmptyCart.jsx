@@ -1,9 +1,7 @@
 import { Link } from 'react-router-dom'
-
 import { Button } from '../index'
 
 import emptySvg from './../../assets/images/empty-cart.svg'
-
 import * as s from './EmptyCart.module.sass'
 
 const EmptyCart = () => {

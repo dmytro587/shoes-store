@@ -20,14 +20,14 @@ const getPagination = (count, currentPage) => {
 
    if (count >= 10) {
       startPages.push(...range(1, 3))
-      endPages.push(...range(1, 3))
+      endPages.push(...range(count, count - 3))
    }
 
    const pageNeighbours = 1
    const startPage = 1
    const endPage = count
-   const hasLeftSpill = currentPage > 2
-   const hasRightSpill = endPage - currentPage > 2
+   const hasLeftSpill = currentPage > 3
+   const hasRightSpill = endPage - currentPage > 3
    const hasSpillOffset = hasLeftSpill && hasRightSpill
 
    let pagination = []
@@ -61,7 +61,12 @@ const getPagination = (count, currentPage) => {
             endPages.includes(currentPage) ? null : points
          ]
          break
-      default: noop()
+      default:
+         pagination = [
+            prevPage > startPage ? prevPage : null,
+            (currentPage > startPage) && (currentPage < endPage) ? currentPage : null,
+            nextPage < endPage ? nextPage : null
+         ]
    }
 
    pagination = [

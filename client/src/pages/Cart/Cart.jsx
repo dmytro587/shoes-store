@@ -1,18 +1,19 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import {
    clearCart,
+   fetchCart,
    minusItemCount,
    plusItemCount,
    removeItemFromCart,
-   setProductSize
 } from '../../redux/actions/cart'
 import {
+   getIsLoaded,
    getProducts,
    getRemovingState,
-   getTotalItems,
+   getTotalCount,
    getTotalPrice
 } from '../../redux/selectors/cart'
 import {
@@ -33,18 +34,16 @@ const Cart = () => {
    const dispatch = useDispatch()
    const products = useSelector(getProducts)
    const totalPrice = useSelector(getTotalPrice)
-   const totalItems = useSelector(getTotalItems)
+   const totalCount = useSelector(getTotalCount)
    const removingState = useSelector(getRemovingState)
-
-   const [isLoading, setIsLoading] = useState(true)
+   const isLoaded = useSelector(getIsLoaded)
 
    useEffect(() => {
-      const timeout = setTimeout(() => setIsLoading(false), 1000)
-
-      return () => clearTimeout(timeout)
+      dispatch(fetchCart())
+      // eslint-disable-next-line
    }, [])
 
-   if (products.length === 0) {
+   if ((products.length === 0) && isLoaded) {
       return <EmptyCart />
    }
 
@@ -61,25 +60,18 @@ const Cart = () => {
    }
 
    const onClearCart = () => {
-      dispatch(clearCart)
-   }
-
-   const onSelectSize = (id, size) => {
-      dispatch(setProductSize(id, size))
+      dispatch(clearCart())
    }
 
    const items = products.map(product => (
       <CartItem
-         key={ product.id }
-         id={ product.id }
-         onPlusItem={ onPlusItem }
-         onMinusItem={ onMinusItem }
+         key={ product._id }
+         id={ product._id }
+         onPlusItemCount={ onPlusItem }
+         onMinusItemCount={ onMinusItem }
          onRemoveItem={ removeItem }
-         onSelectSize={ onSelectSize }
          name={ product.name }
          imgUrl={ product.imgUrl }
-         sizes={ product.sizes }
-         selectedSize={ product.selectedSize }
          price={ product.totalPrice }
          count={ product.count }
          removingState={ removingState }
@@ -104,15 +96,15 @@ const Cart = () => {
 
             <div className={ s.items }>
                {
-                  isLoading
-                  ? Array(3).fill('').map((_, index) => <CartItemLoader key={ index } />)
-                  : items
+                  !isLoaded
+                     ? Array(3).fill('').map((_, index) => <CartItemLoader key={ index } />)
+                     : items
                }
             </div>
 
             <div className={ s.totalInfo }>
                <span>
-                  Всего товаров: <strong>{ totalItems } шт.</strong>
+                  Всего товаров: <strong>{ totalCount } шт.</strong>
                </span>
                <span>
                   Сумма заказа: <strong className={ s.totalPrice }>{ totalPrice } ₴</strong>

@@ -7,10 +7,12 @@ const { PORT, MONGODB_URI } = require('./config')
 const app = express()
 
 app.use(express.static(`${__dirname}/public`))
+app.use(express.json())
 app.use(cors())
 
 // Models
 require('./models/Product')
+require('./models/User')
 
 // Routes
 app.use('/api', require('./routes'))
@@ -27,6 +29,8 @@ mongoose.connect(
       console.log(`Server has been started on ${PORT} port`)
    })
 })
+
+
 
 
 

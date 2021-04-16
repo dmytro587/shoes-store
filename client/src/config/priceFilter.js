@@ -1,4 +1,4 @@
-export default [
+const priceFilter = [
    {
       id: 1,
       name: 'price-range',
@@ -28,3 +28,5 @@ export default [
       value: 'option4'
    }
 ]
+
+export default priceFilter

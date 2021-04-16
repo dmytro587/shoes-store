@@ -1,21 +1,32 @@
-import { SET_IS_LOADING, SET_PRODUCTS, SET_PRODUCTS_ADDED_TO_CART } from '../actionTypes/products'
+import {
+   CLEAR_PRODUCTS,
+   SET_IS_LOADING,
+   SUCCESS_FETCHING_PRODUCTS,
+   ERROR_FETCHING_PRODUCTS
+} from '../actionTypes/products'
 
 const initialState = {
    products: [],
    totalCount: 0,
    isLoading: false,
-   productsAddedToCart: []
+   error: null
 }
 
 const productsReducer = (state = initialState, action) => {
    switch (action.type) {
-
-      case SET_PRODUCTS:
+      case SUCCESS_FETCHING_PRODUCTS:
          return {
             ...state,
             products: action.payload.items,
             totalCount: action.payload.totalCount,
-            isLoading: false
+            isLoading: false,
+            error: null
+         }
+
+      case ERROR_FETCHING_PRODUCTS:
+         return {
+            ...state,
+            error: action.payload
          }
 
       case SET_IS_LOADING:
@@ -24,11 +35,12 @@ const productsReducer = (state = initialState, action) => {
             isLoading: action.payload
          }
 
-      case SET_PRODUCTS_ADDED_TO_CART:
+      case CLEAR_PRODUCTS:
          return {
             ...state,
-            productsAddedToCart: [ ...action.payload ]
-         }
+            products: [],
+            totalCount: 0
+      }
 
       default:
          return state

@@ -7,14 +7,19 @@ const Button = ({
     outline,
     quantity,
     onClick,
-    black
+    black,
+    small,
+    className
 }) => (
    <button
-      className={ cn(s.button, {
-         [s.outline]: !!outline,
-         [s.fill]: !!fill,
-         [s.black]: !!black
-       }) }
+      className={
+         cn(s.button, className, {
+            [s.outline]: !!outline,
+            [s.fill]: !!fill,
+            [s.black]: !!black,
+            [s.small]: !!small
+         })
+      }
       onClick={ onClick }
    >
       { children }

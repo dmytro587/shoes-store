@@ -1,35 +1,28 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { addProductToCart } from '../../redux/actions/cart'
+import { addProductToCart, fetchCartInfo } from '../../redux/actions/cart'
 import { fetchProducts } from '../../redux/actions/products'
 import { setCategory, setCurrentPage, setSortByPrice } from '../../redux/actions/filters'
 
 import { getPriceSort, getSizeSort, getCategorySort, getCurrentPage } from '../../redux/selectors/filters'
-import { getIsLoading, getProducts, getTotalPages } from '../../redux/selectors/products'
+import { getError, getIsLoading, getProducts, getTotalPages } from '../../redux/selectors/products'
+import { getIsAuthed } from '../../redux/selectors/auth'
+
 
 import {
    Categories, Sort,
    ProductLoader, ProductCard,
    Sidebar, Pagination
 } from '../../components'
+import { sortTypes, categoryNames } from './../../config'
 
 import * as s from './Home.module.sass'
 
 
-const sortTypes = [
-   { name: 'От дешевых', orderType: 'desc' },
-   { name: 'От дорогих', orderType: 'asc' }
-]
-const categoryNames = [
-   { name: 'Все', type: 'all' },
-   { name: 'Ботинки', type: 'boots' },
-   { name: 'Кроссовки', type: 'trainers' }
-]
-
-
 const Home = () => {
    const dispatch = useDispatch()
+   const isAuthed = useSelector(getIsAuthed)
    const currentPage = useSelector(getCurrentPage)
    const products = useSelector(getProducts)
    const totalPages = useSelector(getTotalPages)
@@ -37,6 +30,12 @@ const Home = () => {
    const priceSort = useSelector(getPriceSort)
    const sizeSort = useSelector(getSizeSort)
    const categorySort = useSelector(getCategorySort)
+   const error = useSelector(getError)
+
+   useEffect(() => {
+      dispatch(fetchCartInfo())
+      // eslint-disable-next-line
+   }, [])
 
    useEffect(() => {
       dispatch(fetchProducts({
@@ -45,7 +44,7 @@ const Home = () => {
          category: categorySort
       }, currentPage))
       // eslint-disable-next-line
-   }, [priceSort, sizeSort, categorySort, currentPage])
+   }, [priceSort, sizeSort, categorySort, currentPage, isAuthed])
 
    const onSortClick = sortByObj => {
       dispatch(setSortByPrice(sortByObj))
@@ -59,8 +58,10 @@ const Home = () => {
       dispatch(setCurrentPage(pageNum))
    }
 
-   const addProduct = productData => {
-      dispatch(addProductToCart(productData))
+   const addToCartHandler = productId => {
+      dispatch(addProductToCart(productId)).then(() => {
+         dispatch(fetchCartInfo())
+      })
    }
 
    const productsList = products.map(product => {
@@ -68,7 +69,7 @@ const Home = () => {
          <ProductCard
             key={ product._id }
             id={ product._id }
-            onAddClick={ addProduct }
+            onAddClick={ addToCartHandler }
             name={ product.name }
             price={ product.price }
             imgUrl={ product.imgUrl }
@@ -76,6 +77,25 @@ const Home = () => {
          />
       )
    })
+
+   const getContent = () => {
+      switch(true) {
+         case isLoading:
+            return Array(10).fill('').map((_, index) => <ProductLoader key={ index } />)
+         case productsList.length > 0:
+            return productsList
+         case !error:
+            return <h4>За указанными параметрами ничего не найдено</h4>
+         case !!error:
+            return (
+               <div className={s.error}>
+                  <h2>Ошибка <span>{error.status}</span></h2>
+                  <div>{error.message}</div>
+               </div>
+            )
+         default: return null
+      }
+   }
 
    return (
       <div>
@@ -94,11 +114,7 @@ const Home = () => {
 
                <div className={ s.body }>
                   <div className={ s.content }>
-                     {
-                        isLoading
-                           ? Array(10).fill('').map((_, index) => <ProductLoader key={ index } />)
-                           : productsList.length > 0 ? productsList : <h4>За указанными параметрами ничего не найдено</h4>
-                     }
+                     { getContent() }
                   </div>
                   {
                      productsList.length > 0

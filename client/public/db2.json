@@ -1,0 +1,74 @@
+{
+  "products": [
+    {
+      "imgUrl": "https://cdn.chec.io/merchants/22626/assets/z6bPmFUZxZcWMBE1|191572019.jpg",
+      "name": "Ботинки, кожа",
+      "price": 500,
+      "categories": ["boots"],
+      "sizes": [38, 39, 40, 41]
+    },
+    {
+      "imgUrl": "https://cdn.chec.io/merchants/22626/assets/Dy7Ox97Qu2jnnhc3|47443341_2.jpg",
+      "name": "Ботинки , кожа натуральная",
+      "price": 1500,
+      "categories": ["boots"],
+      "sizes": [38, 39, 40, 41]
+    },
+    {
+      "imgUrl": "https://cdn.chec.io/merchants/22626/assets/2LI15QXS6c1c64EA|47546355_9.jpg",
+      "name": "Ботинки dr. martens hadon",
+      "price": 2500,
+      "categories": ["boots"],
+      "sizes": [38, 40, 41]
+    },
+    {
+      "imgUrl": "https://cdn.chec.io/merchants/22626/assets/6FpOVr7ufLVa32hd|47474461_2.jpg",
+      "name": "Ботинки зимние dr. martens 1460 total black fur ❄️сапоги мартинсы",
+      "price": 3500,
+      "categories": ["boots"],
+      "sizes": [37, 38, 39, 40, 41]
+    },
+    {
+      "imgUrl": "https://cdn.chec.io/merchants/22626/assets/VND8XGeg7YT11Mas|47642835_2.jpg",
+      "name": "Пудровые демисезонные ботинки",
+      "price": 2250,
+      "categories": ["boots"],
+      "sizes": [38, 39, 40, 41, 42]
+    },
+    {
+      "imgUrl": "https://cdn.chec.io/merchants/22626/assets/SgKxx1CB3wDdgjIB|47356241_2.jpg",
+      "name": "Ботинки женские baldric черные",
+      "price": 2250,
+      "categories": ["boots"],
+      "sizes": [38, 39, 40, 41, 42]
+    },
+    {
+      "imgUrl": "https://cdn.chec.io/merchants/22626/assets/ZrPxHHiymEfbxGKL|1517303530_w640_h640_krossovki-zhenskie-fila.jpg",
+      "name": "Кроссовки женские Fila Disruptor II Pink White розовые",
+      "price": 1005,
+      "categories": ["trainers"],
+      "sizes": [38, 39, 40, 41, 43]
+    },
+    {
+      "imgUrl": "https://cdn.chec.io/merchants/22626/assets/9ystPpRhVqLFqPjj|133557321.jpg",
+      "name": "Массивные женские кроссовки кожа черный цвет",
+      "price": 3100,
+      "categories": ["trainers"],
+      "sizes": [38, 39, 40, 41]
+    },
+    {
+      "imgUrl": "https://cdn.chec.io/merchants/22626/assets/PTs8BkLfD2yTaxEF|1660156347_w640_h640_1660156347.jpg",
+      "name": "Кроссовки женские черные натуральная кожа на платформе стильные Buffalo London",
+      "price": 2750,
+      "categories": ["trainers"],
+      "sizes": [38, 39, 40]
+    },
+    {
+      "imgUrl": "https://cdn.chec.io/merchants/22626/assets/zJIMURQdxlsxxJkD|2481271552_w640_h640_2481271552.jpg",
+      "name": "Nike Air Force 1 Shadow White Orange",
+      "price": 700,
+      "categories": ["trainers"],
+      "sizes": [38]
+    }
+  ]
+}

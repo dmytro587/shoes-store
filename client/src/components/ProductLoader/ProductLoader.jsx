@@ -4,7 +4,7 @@ import ContentLoader from 'react-content-loader'
 const ProductLoader = props => (
    <ContentLoader
       speed={ 1 }
-      width={ 230 }
+      width={ 312 }
       height={ 352 }
       viewBox="0 0 280 352"
       backgroundColor="#f3f3f3"

@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import cn from 'classnames'
 
+import { availableSizes as sizes } from './../../config'
 import * as s from './SizeForm.module.sass'
 
-const sizes = [36, 37, 38, 39, 40, 41, 42, 43]
 
 const SizeForm = ({ onSelectSize }) => {
    const [activeSizes, setActiveSizes] = useState([])
@@ -69,7 +69,7 @@ const SizeForm = ({ onSelectSize }) => {
             <input
                name="allSizes"
                type="checkbox"
-               checked={ isAllSizesChecked }
+               defaultChecked={ isAllSizesChecked }
             />
             Все размеры
          </label>
