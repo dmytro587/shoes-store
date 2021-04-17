@@ -5,6 +5,7 @@ const { model } = require('mongoose')
 
 const { user: userRole } = require('../config/roles')
 const { SECRET_KEY } = require('../config')
+const { getTokenFromHeaders } = require('../utils')
 
 const User = model('User')
 
@@ -34,7 +35,7 @@ exports.login = async (req, res) => {
    } catch (e) {
       console.log(__filename, e)
       res.status(400).json({
-         message: "Что-то пошло не так, попробуйте позже"
+         message: 'Что-то пошло не так, попробуйте позже'
       })
    }
 }
@@ -53,7 +54,7 @@ exports.registration = async (req, res) => {
       const candidate = await User.findOne({ email })
 
       if (candidate) {
-         return res.status(400).json({ message: "Такой пользователь уже есть" })
+         return res.status(400).json({ message: 'Такой пользователь уже есть' })
       }
 
       const hashPassword = await bcrypt.hash(password, 12)
@@ -67,12 +68,12 @@ exports.registration = async (req, res) => {
       await user.save()
 
       res.status(200).json({
-         message: "Регистрация прошла успешно"
+         message: 'Регистрация прошла успешно'
       })
    } catch (e) {
       console.log(__filename, e)
       res.status(400).json({
-         message: "Ошибка регистрации, попробуйте позже"
+         message: 'Ошибка регистрации, попробуйте позже'
       })
    }
 }

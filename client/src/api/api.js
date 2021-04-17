@@ -60,6 +60,10 @@ export const fetchProducts = async (sortByObj, pagination) => {
    return response.data
 }
 
+export const autoLogin = () => {
+   return instance.get('auth/check-auth', getHeadersWithAuth())
+}
+
 export const login = async ({ username, email, password }) => {
    const response = await instance.post('auth/login', {
       username,

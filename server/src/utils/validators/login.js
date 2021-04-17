@@ -2,11 +2,9 @@ const bcrypt = require('bcrypt')
 const { model } = require('mongoose')
 const { body } = require('express-validator')
 
-const User = model('User')
-
 async function usernameValidator(value) {
    try {
-      const candidate = await User.findOne({ username: value })
+      const candidate = await model('User').findOne({ username: value })
 
       if (!candidate) {
          return Promise.reject('Неверное имя')
@@ -18,9 +16,7 @@ async function usernameValidator(value) {
 
 async function emailValidator(value) {
    try {
-      const candidate = await User.findOne({ email: value })
-
-      console.log('email', candidate)
+      const candidate = await model('User').findOne({ email: value })
 
       if (!candidate) {
          return Promise.reject('Пользователя с таким email не существует')
@@ -32,7 +28,7 @@ async function emailValidator(value) {
 
 async function passwordValidator(value, { req }) {
    try {
-      const candidate = await User.findOne({ email: req.body.email })
+      const candidate = await model('User').findOne({ email: req.body.email })
       const isValidPassword = await bcrypt.compare(value, candidate.password)
 
       if (!isValidPassword) {

@@ -1,4 +1,3 @@
-import React from "react"
 import * as s from './CartItemLoader.module.sass'
 
 const CartItemLoader = () => (
@@ -42,4 +41,3 @@ const CartItemLoader = () => (
 )
 
 export default CartItemLoader
-

@@ -6,7 +6,8 @@ import {
 } from '../actionTypes/auth'
 import {
    login as loginAPI,
-   registration as registrationAPI
+   registration as registrationAPI,
+   autoLogin as autoLoginAPI
 } from './../../api/api'
 
 const registerSuccess = {
@@ -34,6 +35,17 @@ export const login = loginData => async dispatch => {
    }
 }
 
+export const autoLogin = () => async dispatch => {
+   const token = localStorage.getItem('token')
+
+   try {
+      await autoLoginAPI()
+      dispatch(loginSuccess(token))
+   } catch (e) {
+      console.log(e.response.data)
+   }
+}
+
 export const registration = registerData => async dispatch => {
    try {
       await registrationAPI(registerData)
@@ -41,14 +53,6 @@ export const registration = registerData => async dispatch => {
    } catch (e) {
       console.log(e.response.data)
       dispatch(setError(e.response.data))
-   }
-}
-
-export const autoLogin = () => dispatch => {
-   const token = localStorage.getItem('token')
-
-   if (token) {
-      dispatch(loginSuccess(token))
    }
 }
 

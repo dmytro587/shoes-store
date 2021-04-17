@@ -3,11 +3,13 @@ const jwt = require('jsonwebtoken')
 const { getTokenFromHeaders } = require('../utils')
 const { SECRET_KEY } = require('./../config')
 
+// this middleware is temporarily not used
 module.exports = roles => (req, res, next) => {
    const token = getTokenFromHeaders(req)
 
    if (!token) {
       return res.status(403).json({
+         status: 403,
          message: "Пользователь не авторизован"
       })
    }
@@ -24,6 +26,7 @@ module.exports = roles => (req, res, next) => {
 
       if (!hasAccess) {
          return res.status(403).json({
+            status: 403,
             message: "Отказано в доступе"
          })
       }
@@ -32,6 +35,7 @@ module.exports = roles => (req, res, next) => {
    } catch (e) {
       console.log(e)
       return res.status(403).json({
+         status: 403,
          message: "Пользователь не авторизован"
       })
    }
