@@ -32,12 +32,15 @@ exports.getProducts = async (req, res) => {
          }
       }
 
-      const totalCount = await Product.countDocuments()
       const products = await Product.find(mainOps, null, {
          ...addOps,
          skip: page > 1 ? 5 * (page - 1) : 0,
          limit: +pageLimit || 5
       })
+
+      const totalCount = (category || sizes)
+         ? products.length
+         : await Product.countDocuments()
 
       res.status(200).json({
          products,

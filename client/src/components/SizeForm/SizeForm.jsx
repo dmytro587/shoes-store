@@ -24,6 +24,7 @@ const SizeForm = ({ onSelectSize }) => {
       } else {
          setActiveSizes([...activeSizes, index])
       }
+      setIsAllSizesChecked(false)
    }
 
    const onSelectAllSizes = () => {
@@ -64,12 +65,12 @@ const SizeForm = ({ onSelectSize }) => {
 
          <label
             className={ s.allSizes }
-            onChange={ onSelectAllSizes }
          >
             <input
                name="allSizes"
                type="checkbox"
-               defaultChecked={ isAllSizesChecked }
+               onChange={ onSelectAllSizes }
+               checked={ isAllSizesChecked }
             />
             Все размеры
          </label>

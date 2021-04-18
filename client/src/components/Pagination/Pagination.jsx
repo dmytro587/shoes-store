@@ -69,7 +69,7 @@ const getPagination = (count, currentPage) => {
    pagination = [
       startPage,
       ...pagination,
-      endPage
+      endPage > startPage ? endPage : null
    ]
 
    return pagination

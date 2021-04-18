@@ -1,5 +1,6 @@
 import {
-   SET_CATEGORY, SET_CURRENT_PAGE,
+   SET_CATEGORY,
+   SET_CURRENT_PAGE,
    SET_SORT_BY_PRICE,
    SET_SORT_BY_SIZES
 } from '../actionTypes/filters'

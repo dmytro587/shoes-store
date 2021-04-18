@@ -4,7 +4,7 @@ import {
    SUCCESS_FETCHING_PRODUCTS,
    ERROR_FETCHING_PRODUCTS
 } from '../actionTypes/products'
-import { productsAPI } from './../../api';
+import { productsAPI } from './../../api'
 
 const setIsLoading = bool => ({
    type: SET_IS_LOADING,
