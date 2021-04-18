@@ -5,13 +5,18 @@ const { model } = require('mongoose')
 
 const { user: userRole } = require('../config/roles')
 const { SECRET_KEY } = require('../config')
-const { getTokenFromHeaders } = require('../utils')
 
 const User = model('User')
 
 const generateAccessToken = (id, roles) => {
    return jwt.sign({ id, roles }, SECRET_KEY, {
       expiresIn: '24h'
+   })
+}
+
+exports.autoLogin = (req, res) => {
+   res.status(200).json({
+      message: 'Авторизация прошла успешно'
    })
 }
 
