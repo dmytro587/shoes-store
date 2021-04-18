@@ -4,8 +4,7 @@ import {
    SUCCESS_FETCHING_PRODUCTS,
    ERROR_FETCHING_PRODUCTS
 } from '../actionTypes/products'
-import { fetchProducts as fetchProductsAPI } from '../../api/api'
-
+import { productsAPI } from './../../api';
 
 const setIsLoading = bool => ({
    type: SET_IS_LOADING,
@@ -41,7 +40,7 @@ export const fetchProducts = (filters, currentPage) => async (dispatch, getState
    }
 
    try {
-      const { products, totalCount } = await fetchProductsAPI(filters, pagination, token)
+      const { products, totalCount } = await productsAPI.fetchProducts(filters, pagination, token)
       dispatch(successFetching(products, totalCount))
    } catch (e) {
       dispatch(errorFetching(e.response.data))

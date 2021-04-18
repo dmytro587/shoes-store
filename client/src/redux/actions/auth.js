@@ -4,11 +4,7 @@ import {
    REGISTER_SUCCESS,
    SET_ERROR
 } from '../actionTypes/auth'
-import {
-   login as loginAPI,
-   registration as registrationAPI,
-   autoLogin as autoLoginAPI
-} from './../../api/api'
+import { authAPI } from '../../api'
 
 const registerSuccess = {
    type: REGISTER_SUCCESS
@@ -26,7 +22,7 @@ const loginSuccess = token => ({
 
 export const login = loginData => async dispatch => {
    try {
-      const token = await loginAPI(loginData)
+      const token = await authAPI.login(loginData)
       localStorage.setItem('token', token)
       dispatch(loginSuccess(token))
    } catch (e) {
@@ -39,7 +35,7 @@ export const autoLogin = () => async dispatch => {
    const token = localStorage.getItem('token')
 
    try {
-      await autoLoginAPI()
+      await authAPI.autoLogin()
       dispatch(loginSuccess(token))
    } catch (e) {
       console.log(e.response.data)
@@ -48,7 +44,7 @@ export const autoLogin = () => async dispatch => {
 
 export const registration = registerData => async dispatch => {
    try {
-      await registrationAPI(registerData)
+      await authAPI.registration(registerData)
       dispatch(registerSuccess)
    } catch (e) {
       console.log(e.response.data)

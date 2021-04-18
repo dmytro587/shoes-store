@@ -7,8 +7,6 @@ const { SECRET_KEY } = require('./../config')
 module.exports = async (req, res, next) => {
    const token = getTokenFromHeaders(req)
 
-   console.log('checkauht')
-
    if (!token) {
       return res.status(403).json({
          message: "Пользователь не авторизован",

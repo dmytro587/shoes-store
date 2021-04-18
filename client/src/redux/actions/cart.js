@@ -1,12 +1,4 @@
-import {
-   addProductToCart as addProductToCartAPI,
-   fetchCart as fetchCartAPI,
-   fetchCartInfo as fetchCartInfoAPI,
-   clearCart as clearCartAPI,
-   removeFromCart as removeFromCartAPI,
-   minusProductCount,
-   plusProductCount
-} from './../../api/api'
+import { cartAPI } from '../../api'
 
 import {
    CLEAR_CART,
@@ -68,7 +60,7 @@ const fetchCartSuccess = (products, totalPrice, totalCount) => ({
 export const fetchCart = () => async dispatch => {
    try {
       dispatch(setIsLoaded(false))
-      const { products, totalPrice, totalCount } = await fetchCartAPI()
+      const { products, totalPrice, totalCount } = await cartAPI.fetchCart()
 
       dispatch(fetchCartSuccess(products, totalPrice, totalCount))
    } catch (e) {
@@ -80,7 +72,7 @@ export const fetchCart = () => async dispatch => {
 
 export const fetchCartInfo = () => async dispatch => {
    try {
-      const { totalPrice, totalCount } = await fetchCartInfoAPI()
+      const { totalPrice, totalCount } = await cartAPI.fetchCartInfo()
 
       dispatch(fetchCartInfoSuccess(totalPrice, totalCount))
    } catch (e) {
@@ -91,8 +83,10 @@ export const fetchCartInfo = () => async dispatch => {
 export const addProductToCart = productId => async dispatch => {
    try {
       dispatch(setAddingState(productId, true))
+
       await delay(200)
-      await addProductToCartAPI(productId)
+      await cartAPI.addProductToCart(productId)
+
       dispatch(addProductToCartSuccess)
    } catch (e) {
       console.log(e)
@@ -103,7 +97,7 @@ export const addProductToCart = productId => async dispatch => {
 
 export const plusItemCount = productId => async dispatch => {
    try {
-      const { products, totalPrice, totalCount } = await plusProductCount(productId)
+      const { products, totalPrice, totalCount } = await cartAPI.plusProductCount(productId)
       dispatch(fetchCartSuccess(products, totalPrice, totalCount))
    } catch (e) {
       console.log(e)
@@ -112,7 +106,7 @@ export const plusItemCount = productId => async dispatch => {
 
 export const minusItemCount = productId => async dispatch => {
    try {
-      const { products, totalPrice, totalCount } = await minusProductCount(productId)
+      const { products, totalPrice, totalCount } = await cartAPI.minusProductCount(productId)
       dispatch(fetchCartSuccess(products, totalPrice, totalCount))
    } catch (e) {
       console.log(e)
@@ -121,10 +115,9 @@ export const minusItemCount = productId => async dispatch => {
 
 export const clearCart = () => async dispatch => {
    try {
-      await clearCartAPI()
+      await cartAPI.clearCart()
       dispatch(clearCartAC)
    } catch (e) {
-      console.log('errorrrrrr')
       console.log(e)
    }
 }
@@ -135,7 +128,7 @@ export const removeItemFromCart = itemId => async dispatch => {
       dispatch(setRemovingState(itemId, true))
 
       try {
-         const { products, totalPrice, totalCount } = await removeFromCartAPI(itemId)
+         const { products, totalPrice, totalCount } = await cartAPI.removeFromCart(itemId)
          dispatch(fetchCartSuccess(products, totalPrice, totalCount))
       } catch (e) {
          console.log(e)
