@@ -9,7 +9,6 @@ import { getPriceSort, getSizeSort, getCategorySort, getCurrentPage } from '../.
 import { getError, getIsLoading, getProducts, getTotalPages } from '../../redux/selectors/products'
 import { getIsAuthed } from '../../redux/selectors/auth'
 
-
 import {
    Categories, Sort,
    ProductLoader, ProductCard,

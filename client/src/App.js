@@ -25,7 +25,7 @@ const App = () => {
       return (
          <div className="loader-wrapper">
             <Loader
-               type="Oval"
+               type="Rings"
                color="#000"
                height={ 100 }
                width={ 100 }

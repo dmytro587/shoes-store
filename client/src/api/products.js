@@ -36,7 +36,6 @@ const productsAPI = {
          + categoryUrl
          + priceSortUrl
          + priceRangeUrl
-         + priceRangeUrl
          + sizesUrl
          + pageUrl
          + limitUrl,
