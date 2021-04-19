@@ -1,4 +1,4 @@
-import { Link, Route } from 'react-router-dom'
+import { Link, Route, Switch } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { logout } from '../../redux/actions/auth'
@@ -10,6 +10,12 @@ import cartSvg from './../../assets/images/basket.svg'
 import logoSvg from './../../assets/images/logo.svg'
 
 import * as s from './Header.module.sass'
+
+const AuthLink = () => (
+   <Link to="/auth/login" className={ s.text }>
+      <Button fill black small>Войти</Button>
+   </Link>
+)
 
 const Header = () => {
    const dispatch = useDispatch()
@@ -29,12 +35,12 @@ const Header = () => {
 
          {
             isAuthed ? (
-               <div className={s.right}>
+               <div className={ s.right }>
                   <span className={ s.logout } onClick={ onLogout }>
                      Выйти
                   </span>
                   <Route path="/home">
-                     <span className={s.separator} />
+                     <span className={ s.separator }/>
                      <Link to="/cart" className={ s.basket }>
                         <span>{ price } ₴</span>
                         <span className={ s.count }>
@@ -45,11 +51,10 @@ const Header = () => {
                   </Route>
                </div>
             ) : (
-               <Route path="/home">
-                  <Link to="/auth/login" className={ s.text }>
-                     <Button fill black small>Войти</Button>
-                  </Link>
-               </Route>
+               <Switch>
+                  <Route path="/home" component={ AuthLink }/>
+                  <Route exact path="/" component={ AuthLink }/>
+               </Switch>
             )
          }
       </div>

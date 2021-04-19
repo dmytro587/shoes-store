@@ -21,6 +21,8 @@ const userSchema = new Schema({
          default: userRole
       }
    ],
+   resetToken: String,
+   resetTokenExp: String,
    cart: {
       totalPrice: {
          type: Number,

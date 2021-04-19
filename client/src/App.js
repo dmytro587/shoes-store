@@ -7,7 +7,7 @@ import { getIsInitialized } from './redux/selectors/app'
 import { getIsAuthed } from './redux/selectors/auth'
 
 import { Header } from './components'
-import { Home, Cart, Auth } from './pages'
+import { Home, Cart, Auth, ResetPassword, NewPassword } from './pages'
 import Loader from 'react-loader-spinner'
 
 
@@ -38,6 +38,8 @@ const App = () => {
       <Switch>
          <Route path="/home" component={ Home }/>
          <Route path="/auth" component={ Auth }/>
+         <Route path="/reset-password" component={ ResetPassword } />
+         <Route path="/new-password/:token" component={ NewPassword } />
          <Route path="*" component={ Home }/>
       </Switch>
    )

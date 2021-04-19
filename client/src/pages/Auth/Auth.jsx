@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import cn from 'classnames'
 
 import { login, registration } from '../../redux/actions/auth'
-import { getError, getIsAuthed, getIsRegistered } from '../../redux/selectors/auth'
+import { getAlert, getError, getIsAuthed, getIsRegistered } from '../../redux/selectors/auth'
 import { LoginForm, RegistrationForm } from '../../components'
 
 import * as s from './Auth.module.sass'
@@ -14,6 +14,7 @@ const Auth = () => {
    const history = useHistory()
    const isAuthed = useSelector(getIsAuthed)
    const error = useSelector(getError)
+   const alert = useSelector(getAlert)
    const isRegistered = useSelector(getIsRegistered)
 
    useEffect(() => {
@@ -63,7 +64,7 @@ const Auth = () => {
          </header>
 
          <Route exact path="/auth/login">
-            <LoginForm error={ error } onSubmit={ onLogin }/>
+            <LoginForm alert={ alert } error={ error } onSubmit={ onLogin }/>
          </Route>
          <Route exact path="/auth/registration">
             <RegistrationForm error={ error } onSubmit={ onRegister }/>

@@ -2,12 +2,14 @@ import {
    LOGIN_SUCCESS,
    LOGOUT,
    REGISTER_SUCCESS,
+   SET_ALERT,
    SET_ERROR
 } from '../actionTypes/auth'
 
 const initialState = {
    token: null,
    isRegistered: false,
+   alert: null,
    error: null
 }
 
@@ -35,6 +37,12 @@ const authReducer = (state = initialState, action) => {
          return {
             ...state,
             error: action.payload
+         }
+      case SET_ALERT:
+         return {
+            ...state,
+            alert: action.payload,
+            error: null
          }
       default: return state
    }

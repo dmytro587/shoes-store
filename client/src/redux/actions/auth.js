@@ -2,6 +2,7 @@ import {
    LOGIN_SUCCESS,
    LOGOUT,
    REGISTER_SUCCESS,
+   SET_ALERT,
    SET_ERROR
 } from '../actionTypes/auth'
 import { authAPI } from '../../api'
@@ -9,6 +10,11 @@ import { authAPI } from '../../api'
 const registerSuccess = {
    type: REGISTER_SUCCESS
 }
+
+const setAlert = msg => ({
+   type: SET_ALERT,
+   payload: msg
+})
 
 const setError = error => ({
    type: SET_ERROR,
@@ -26,7 +32,7 @@ export const login = loginData => async dispatch => {
       localStorage.setItem('token', token)
       dispatch(loginSuccess(token))
    } catch (e) {
-      console.log(e.response.data)
+      console.log(e)
       dispatch(setError(e.response.data))
    }
 }
@@ -38,7 +44,7 @@ export const autoLogin = () => async dispatch => {
       await authAPI.autoLogin()
       dispatch(loginSuccess(token))
    } catch (e) {
-      console.log(e.response.data)
+      console.log(e)
    }
 }
 
@@ -47,7 +53,7 @@ export const registration = registerData => async dispatch => {
       await authAPI.registration(registerData)
       dispatch(registerSuccess)
    } catch (e) {
-      console.log(e.response.data)
+      console.log(e)
       dispatch(setError(e.response.data))
    }
 }
@@ -57,3 +63,22 @@ export const logout = () => {
    return { type: LOGOUT }
 }
 
+export const resetPassword = email => async dispatch => {
+   try {
+      const { message } = await authAPI.resetPassword(email)
+      dispatch(setAlert(message))
+   } catch (e) {
+      console.log(e)
+      dispatch(setError(e.response.data))
+   }
+}
+
+export const newPassword = (password, confirm, token) => async dispatch => {
+   try {
+      const { message } = await authAPI.newPassword(password, confirm, token)
+      dispatch(setAlert(message))
+   } catch (e) {
+      console.log(e)
+      dispatch(setError(e.response.data))
+   }
+}

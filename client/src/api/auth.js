@@ -24,6 +24,22 @@ const authAPI = {
       })
 
       return response.data
+   },
+
+   async resetPassword(email) {
+      const response = await instance.post('auth/reset-password', { email })
+
+      return response.data
+   },
+
+   async newPassword(newPassword, confirm, token) {
+      const response = await instance.post('auth/new-password', {
+         password: newPassword,
+         confirm,
+         token
+      })
+
+      return response.data
    }
 }
 

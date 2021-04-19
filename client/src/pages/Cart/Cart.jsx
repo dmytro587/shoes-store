@@ -86,7 +86,6 @@ const Cart = () => {
             <div className={ s.cartTop }>
                <img src={ grayLogoSvg } alt=""/>
                <h2 className={ s.title }>Корзина</h2>
-
                <div
                   className={ s.trash }
                   onClick={ onClearCart }
@@ -99,7 +98,9 @@ const Cart = () => {
             <div className={ s.items }>
                {
                   !isLoaded
-                     ? Array(3).fill('').map((_, index) => <CartItemLoader key={ index } />)
+                     ? Array(3)
+                        .fill('')
+                        .map((_, index) => <CartItemLoader key={ index } />)
                      : items
                }
             </div>
