@@ -1,4 +1,4 @@
-import { instance, getHeadersWithAuth } from './api'
+import { instance } from './api'
 import { delay } from '../utils'
 
 const productsAPI = {
@@ -38,8 +38,7 @@ const productsAPI = {
          + priceRangeUrl
          + sizesUrl
          + pageUrl
-         + limitUrl,
-         getHeadersWithAuth()
+         + limitUrl
       )
 
       return response.data

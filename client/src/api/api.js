@@ -4,15 +4,10 @@ export const instance = axios.create({
    baseURL: 'http://localhost:5000/api/'
 })
 
-export const getHeadersWithAuth = () => {
-   const config = {}
+instance.interceptors.request.use(function (config) {
    const token = localStorage.getItem('token')
-
-   if (token) {
-      config.headers = {}
-      config.headers['Authorization'] = 'Bearer ' + token
-   }
+   config.headers.Authorization =  token ? `Bearer ${token}` : ''
 
    return config
-}
+})
 

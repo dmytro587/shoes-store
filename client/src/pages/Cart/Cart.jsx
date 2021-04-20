@@ -39,9 +39,7 @@ const Cart = () => {
    const isLoaded = useSelector(getIsLoaded)
 
    useEffect(() => {
-      if (products.length === 0) {
-         dispatch(fetchCart())
-      }
+      dispatch(fetchCart())
       // eslint-disable-next-line
    }, [])
 

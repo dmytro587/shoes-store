@@ -1,8 +1,8 @@
-import { instance, getHeadersWithAuth } from './api'
+import { instance } from './api'
 
 const authAPI = {
    autoLogin() {
-      return instance.get('auth/check-auth', getHeadersWithAuth())
+      return instance.get('auth/check-auth')
    },
 
    async login({ username, email, password }) {

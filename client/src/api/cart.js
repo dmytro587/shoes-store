@@ -1,26 +1,26 @@
-import { instance, getHeadersWithAuth } from './api'
+import { instance } from './api'
 
 const cartAPI = {
    async fetchCart() {
-      const response = await instance.get('cart', getHeadersWithAuth())
+      const response = await instance.get('cart')
 
       return response.data
    },
 
    async fetchCartInfo() {
-      const response = await instance.get('cart/info', getHeadersWithAuth())
+      const response = await instance.get('cart/info')
 
       return response.data
    },
 
    async addProductToCart(productId) {
-      return instance.post('cart/add', { productId }, getHeadersWithAuth())
+      return instance.post('cart/add', { productId })
    },
 
    async plusProductCount(productId) {
       const response = await instance.put('cart/plus-product-count', {
          productId
-      }, getHeadersWithAuth())
+      })
 
       return response.data
    },
@@ -28,19 +28,19 @@ const cartAPI = {
    async minusProductCount(productId) {
       const response = await instance.put('cart/minus-product-count', {
          productId
-      }, getHeadersWithAuth())
+      })
 
       return response.data
    },
 
    async removeFromCart(productId) {
-      const response = await instance.delete(`cart/remove/${productId}`, getHeadersWithAuth())
+      const response = await instance.delete(`cart/remove/${productId}`)
 
       return response.data
    },
 
    async clearCart() {
-      return instance.put('cart/clear', {}, getHeadersWithAuth())
+      return instance.put('cart/clear')
    }
 }
 
