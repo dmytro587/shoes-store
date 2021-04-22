@@ -5,7 +5,7 @@ import {
    SET_ALERT,
    SET_ERROR
 } from '../actionTypes/auth'
-import { setError as setAppError } from './app'
+import { checkAndSetAppError, setError as setAppError } from './app'
 import { authAPI } from '../../api'
 
 const registerSuccess = {
@@ -45,11 +45,8 @@ export const autoLogin = () => async dispatch => {
       await authAPI.autoLogin()
       dispatch(loginSuccess(token))
    } catch (e) {
-      if (!e.response) {
-         dispatch(setAppError({
-            message: 'Сайт временно не доступен, попробуйте позже'
-         }))
-      }
+      console.dir(e)
+      dispatch(checkAndSetAppError(e))
    }
 }
 

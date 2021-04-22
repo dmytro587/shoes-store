@@ -14,11 +14,14 @@ instance.interceptors.request.use(function (config) {
    return Promise.reject(error)
 })
 
-// instance.interceptors.response.use(function (response) {
-//    return response
-// }, function (error) {
-//
-//    if (!error.response) {
-//       return Promise.reject('Сайт временно не доступен')
-//    }
-// })
+instance.interceptors.response.use(function (response) {
+   return response
+}, function (error) {
+
+   if (!error.response) {
+      return Promise.reject({
+         status: 503,
+         message: 'Сайт временно не доступен'
+      })
+   }
+})

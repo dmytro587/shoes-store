@@ -11,6 +11,14 @@ export const setError = err => ({
    payload: err
 })
 
+export const checkAndSetAppError = error => dispatch => {
+   if (error.status === 503) {
+      dispatch(setError({
+         message: 'Сайт временно не доступен, попробуйте позже'
+      }))
+   }
+}
+
 export const initializeApp = () => dispatch => {
    Promise.all([
       dispatch(autoLogin())
