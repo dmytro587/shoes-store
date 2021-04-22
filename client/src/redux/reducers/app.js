@@ -1,7 +1,8 @@
-import { INITIALIZE_SUCCESS } from '../actionTypes/app'
+import { SET_ERROR, INITIALIZE_SUCCESS } from '../actionTypes/app'
 
 const initialState = {
-   isInitialized: false
+   isInitialized: false,
+   error: null
 }
 
 const appReducer = (state = initialState, action) => {
@@ -10,6 +11,12 @@ const appReducer = (state = initialState, action) => {
          return {
             ...state,
             isInitialized: true
+         }
+
+      case SET_ERROR:
+         return {
+            ...state,
+            error: action.payload
          }
       default: return state
    }

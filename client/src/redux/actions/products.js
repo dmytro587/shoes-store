@@ -43,7 +43,7 @@ export const fetchProducts = (filters, currentPage) => async (dispatch, getState
       const { products, totalCount } = await productsAPI.fetchProducts(filters, pagination, token)
       dispatch(successFetching(products, totalCount))
    } catch (e) {
-      dispatch(errorFetching(e))
+      dispatch(errorFetching(e.response.data))
       dispatch(setIsLoading(false))
    }
 }

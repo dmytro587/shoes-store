@@ -9,5 +9,16 @@ instance.interceptors.request.use(function (config) {
    config.headers.Authorization =  token ? `Bearer ${token}` : ''
 
    return config
+}, function (error) {
+
+   return Promise.reject(error)
 })
 
+// instance.interceptors.response.use(function (response) {
+//    return response
+// }, function (error) {
+//
+//    if (!error.response) {
+//       return Promise.reject('Сайт временно не доступен')
+//    }
+// })

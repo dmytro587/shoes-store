@@ -6,6 +6,7 @@ import { initializeApp } from './redux/actions/app'
 import { getIsInitialized } from './redux/selectors/app'
 import { getIsAuthed } from './redux/selectors/auth'
 
+import { withErrorHandling } from './hoc'
 import { Header } from './components'
 import { Home, Cart, Auth, ResetPassword, NewPassword } from './pages'
 import Loader from 'react-loader-spinner'
@@ -63,5 +64,5 @@ const App = () => {
    )
 }
 
-export default App
+export default withErrorHandling(App)
 
