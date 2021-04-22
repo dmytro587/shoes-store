@@ -23,11 +23,12 @@ const productsReducer = (state = initialState, action) => {
             error: null
          }
 
-      case ERROR_FETCHING_PRODUCTS:
-         return {
-            ...state,
-            error: action.payload
-         }
+      case ERROR_FETCHING_PRODUCTS: {
+         const { message, response } = action.payload
+         const error = response ? response.data : ({ message })
+
+         return { ...state, error }
+      }
 
       case SET_IS_LOADING:
          return {
