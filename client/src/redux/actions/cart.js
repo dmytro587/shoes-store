@@ -9,7 +9,10 @@ import {
    SET_IS_LOADED,
    SET_ADDING_STATE
 } from '../actionTypes/cart'
-import { delay } from '../../utils'
+
+import { setAlert } from './auth'
+import { checkAndSetAppError } from './app'
+import { delay, history } from '../../utils'
 
 const addProductToCartSuccess = {
    type: ADD_PRODUCT_TO_CART
@@ -65,31 +68,42 @@ export const fetchCart = () => async dispatch => {
       dispatch(fetchCartSuccess(products, totalPrice, totalCount))
    } catch (e) {
       console.log(e)
+      dispatch(checkAndSetAppError(e))
    } finally {
       dispatch(setIsLoaded(true))
    }
 }
 
-export const fetchCartInfo = () => async dispatch => {
+export const fetchCartInfo = () => async (dispatch, getState) => {
    try {
+      if (!getState().auth.isAuthed) return null
+
       const { totalPrice, totalCount } = await cartAPI.fetchCartInfo()
 
       dispatch(fetchCartInfoSuccess(totalPrice, totalCount))
    } catch (e) {
       console.log(e)
+      dispatch(checkAndSetAppError(e))
    }
 }
 
-export const addProductToCart = productId => async dispatch => {
+export const addProductToCart = productId => async (dispatch, getState) => {
    try {
+      if (!getState().auth.isAuthed) {
+         dispatch(setAlert('Для добавления товара в корзину необходимо авторизоваться'))
+         return history.push('/auth/login')
+      }
+
       dispatch(setAddingState(productId, true))
 
       await delay(200)
       await cartAPI.addProductToCart(productId)
 
       dispatch(addProductToCartSuccess)
+      dispatch(fetchCartInfo())
    } catch (e) {
       console.log(e)
+      dispatch(checkAndSetAppError(e))
    } finally {
       dispatch(setAddingState(productId, false))
    }
@@ -101,6 +115,7 @@ export const plusItemCount = productId => async dispatch => {
       dispatch(fetchCartSuccess(products, totalPrice, totalCount))
    } catch (e) {
       console.log(e)
+      dispatch(checkAndSetAppError(e))
    }
 }
 
@@ -110,6 +125,7 @@ export const minusItemCount = productId => async dispatch => {
       dispatch(fetchCartSuccess(products, totalPrice, totalCount))
    } catch (e) {
       console.log(e)
+      dispatch(checkAndSetAppError(e))
    }
 }
 
@@ -119,6 +135,7 @@ export const clearCart = () => async dispatch => {
       dispatch(clearCartAC)
    } catch (e) {
       console.log(e)
+      dispatch(checkAndSetAppError(e))
    }
 }
 
@@ -132,6 +149,7 @@ export const removeItemFromCart = itemId => async dispatch => {
          dispatch(fetchCartSuccess(products, totalPrice, totalCount))
       } catch (e) {
          console.log(e)
+         dispatch(checkAndSetAppError(e))
       } finally {
          dispatch(setRemovingState(itemId, false))
       }

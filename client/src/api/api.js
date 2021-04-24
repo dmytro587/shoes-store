@@ -9,9 +9,6 @@ instance.interceptors.request.use(function (config) {
    config.headers.Authorization =  token ? `Bearer ${token}` : ''
 
    return config
-}, function (error) {
-
-   return Promise.reject(error)
 })
 
 instance.interceptors.response.use(function (response) {
@@ -21,7 +18,9 @@ instance.interceptors.response.use(function (response) {
    if (!error.response) {
       return Promise.reject({
          status: 503,
-         message: 'Сайт временно не доступен'
+         message: 'Сервер временно не доступен'
       })
    }
+
+   return Promise.reject(error)
 })

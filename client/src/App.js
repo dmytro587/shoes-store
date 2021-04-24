@@ -1,12 +1,12 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 
 import { initializeApp } from './redux/actions/app'
 import { getIsInitialized } from './redux/selectors/app'
 import { getIsAuthed } from './redux/selectors/auth'
 
-import { withErrorHandling } from './hoc'
+import { withAppErrorHandling } from './hoc'
 import { Header } from './components'
 import { Home, Cart, Auth, ResetPassword, NewPassword } from './pages'
 import Loader from 'react-loader-spinner'
@@ -41,7 +41,7 @@ const App = () => {
          <Route path="/auth" component={ Auth }/>
          <Route path="/reset-password" component={ ResetPassword } />
          <Route path="/new-password/:token" component={ NewPassword } />
-         <Route path="*" component={ Home }/>
+         <Redirect to="/home" />
       </Switch>
    )
 
@@ -51,7 +51,7 @@ const App = () => {
             <Route path="/home" component={ Home }/>
             <Route exact path="/cart" component={ Cart }/>
             <Route path="/auth" component={ Auth }/>
-            <Route path="*" component={ Home }/>
+            <Redirect to="/home" />
          </Switch>
       )
    }
@@ -64,5 +64,5 @@ const App = () => {
    )
 }
 
-export default withErrorHandling(App)
+export default withAppErrorHandling(App)
 

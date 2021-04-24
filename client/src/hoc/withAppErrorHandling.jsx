@@ -6,7 +6,7 @@ import { useNetworkDetector } from '../hooks'
 
 import { ErrorPage } from '../pages'
 
-const withErrorHandling = Component => props => {
+const withAppErrorHandling = Component => props => {
    const initError = useSelector(getError)
    const networkError = useNetworkDetector()
 
@@ -27,7 +27,7 @@ const withErrorHandling = Component => props => {
    if (error) {
       return (
          <ErrorPage
-            message={ error.message }
+            error={ error.message }
             status={ error.status }
          />
       )
@@ -36,4 +36,4 @@ const withErrorHandling = Component => props => {
    return <Component {...props } />
 }
 
-export default withErrorHandling
+export default withAppErrorHandling

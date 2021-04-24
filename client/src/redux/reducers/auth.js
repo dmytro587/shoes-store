@@ -1,4 +1,5 @@
 import {
+   CLEAR_ALERT,
    LOGIN_SUCCESS,
    LOGOUT,
    REGISTER_SUCCESS,
@@ -9,6 +10,7 @@ import {
 const initialState = {
    token: null,
    isRegistered: false,
+   isAuthed: false,
    alert: null,
    error: null
 }
@@ -19,6 +21,7 @@ const authReducer = (state = initialState, action) => {
          return {
             ...state,
             token: action.payload,
+            isAuthed: true,
             error: null
          }
       case REGISTER_SUCCESS:
@@ -31,6 +34,7 @@ const authReducer = (state = initialState, action) => {
          return {
             ...state,
             token: null,
+            isAuthed: false,
             error: null
          }
       case SET_ERROR:
@@ -43,6 +47,11 @@ const authReducer = (state = initialState, action) => {
             ...state,
             alert: action.payload,
             error: null
+         }
+      case CLEAR_ALERT:
+         return {
+            ...state,
+            alert: null
          }
       default: return state
    }

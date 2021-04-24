@@ -31,15 +31,16 @@ const productsAPI = {
          price.order === 'desc' ? `priceSort=desc&` : ''
       ) : ''
 
-      const response = await instance.get(
-         'products?'
-         + categoryUrl
-         + priceSortUrl
-         + priceRangeUrl
-         + sizesUrl
-         + pageUrl
-         + limitUrl
-      )
+      const url = ['products?']
+
+      url.push(categoryUrl)
+      url.push(priceSortUrl)
+      url.push(priceRangeUrl)
+      url.push(sizesUrl)
+      url.push(pageUrl)
+      url.push(limitUrl)
+
+      const response = await instance.get(url.join(''))
 
       return response.data
    }

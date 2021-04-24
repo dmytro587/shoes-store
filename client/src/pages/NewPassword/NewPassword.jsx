@@ -1,6 +1,6 @@
 import { Form } from 'react-final-form'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import { getAlert, getError } from '../../redux/selectors/auth'
 import { newPassword } from '../../redux/actions/auth'
@@ -25,14 +25,12 @@ const validate = values => {
 const NewPassword = () => {
    const dispatch = useDispatch()
    const params = useParams()
-   const history = useHistory()
    const error = useSelector(getError)
    const alert = useSelector(getAlert)
 
    const submitHandler = values => {
       const { password, confirm } = values
       dispatch(newPassword(password, confirm, params.token))
-      history.push('/auth/login')
    }
 
    return (

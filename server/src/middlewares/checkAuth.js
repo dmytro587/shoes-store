@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
       next()
    } catch (e) {
       console.log(e)
-      return res.status(403).send({
+      return res.status(403).json({
          message: 'Срок действия токена истёк',
          status: 403
       })

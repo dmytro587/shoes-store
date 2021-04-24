@@ -28,6 +28,7 @@ import trashSvg from './../../assets/images/trash.svg'
 import arrowLeftSvg from './../../assets/images/arrow-left.svg'
 
 import * as s from './Cart.module.sass'
+import { ErrorBoundary } from '../../hoc'
 
 
 const Cart = () => {
@@ -64,18 +65,19 @@ const Cart = () => {
    }
 
    const items = products.map(product => (
-      <CartItem
-         key={ product._id }
-         id={ product._id }
-         onPlusItemCount={ onPlusItem }
-         onMinusItemCount={ onMinusItem }
-         onRemoveItem={ removeItem }
-         name={ product.name }
-         imgUrl={ product.imgUrl }
-         price={ product.totalPrice }
-         count={ product.count }
-         removingState={ removingState }
-      />
+      <ErrorBoundary isEmpty key={ product._id }>
+         <CartItem
+            id={ product._id }
+            onPlusItemCount={ onPlusItem }
+            onMinusItemCount={ onMinusItem }
+            onRemoveItem={ removeItem }
+            name={ product.name }
+            imgUrl={ product.imgUrl }
+            price={ product.totalPrice }
+            count={ product.count }
+            removingState={ removingState }
+         />
+      </ErrorBoundary>
    ))
 
    return (

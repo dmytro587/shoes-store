@@ -5,6 +5,7 @@ import {
    ERROR_FETCHING_PRODUCTS
 } from '../actionTypes/products'
 import { productsAPI } from './../../api'
+import { checkAndSetAppError } from './app'
 
 const setIsLoading = bool => ({
    type: SET_IS_LOADING,
@@ -43,6 +44,7 @@ export const fetchProducts = (filters, currentPage) => async (dispatch, getState
       const { products, totalCount } = await productsAPI.fetchProducts(filters, pagination, token)
       dispatch(successFetching(products, totalCount))
    } catch (e) {
+      dispatch(checkAndSetAppError(e))
       dispatch(errorFetching(e.response.data))
       dispatch(setIsLoading(false))
    }

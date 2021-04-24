@@ -121,7 +121,7 @@ userSchema.methods.removeProductFromCart = async function(productId) {
 
    if (item) {
       cart.items = cart.items.filter(i => i.productId.toString() !== productId)
-      cart.totalPrice -= product.price
+      cart.totalPrice -= product.price * item.count
       cart.totalCount -= item.count
 
       return this.save()

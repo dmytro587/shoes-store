@@ -8,6 +8,7 @@ import { getAlert, getError, getIsAuthed, getIsRegistered } from '../../redux/se
 import { LoginForm, RegistrationForm } from '../../components'
 
 import * as s from './Auth.module.sass'
+import { ErrorBoundary } from '../../hoc'
 
 const Auth = () => {
    const dispatch = useDispatch()
@@ -64,10 +65,14 @@ const Auth = () => {
          </header>
 
          <Route exact path="/auth/login">
-            <LoginForm alert={ alert } error={ error } onSubmit={ onLogin }/>
+            <ErrorBoundary errorMsg="Что-то пошло не так">
+               <LoginForm alert={ alert } error={ error } onSubmit={ onLogin }/>
+            </ErrorBoundary>
          </Route>
          <Route exact path="/auth/registration">
-            <RegistrationForm error={ error } onSubmit={ onRegister }/>
+            <ErrorBoundary errorMsg="Что-то пошло не так">
+               <RegistrationForm error={ error } onSubmit={ onRegister }/>
+            </ErrorBoundary>
          </Route>
       </div>
    )

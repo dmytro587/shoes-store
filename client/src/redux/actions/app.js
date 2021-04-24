@@ -14,7 +14,7 @@ export const setError = err => ({
 export const checkAndSetAppError = error => dispatch => {
    if (error.status === 503) {
       dispatch(setError({
-         message: 'Сайт временно не доступен, попробуйте позже'
+         message: 'Сервер не доступен, попробуйте позже'
       }))
    }
 }
