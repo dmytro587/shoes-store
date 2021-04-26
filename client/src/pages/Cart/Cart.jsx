@@ -22,13 +22,13 @@ import {
    CartItemLoader,
    EmptyCart
 } from '../../components'
+import { ErrorBoundary } from '../../hoc'
 
 import grayLogoSvg from './../../assets/images/gray-basket.svg'
 import trashSvg from './../../assets/images/trash.svg'
 import arrowLeftSvg from './../../assets/images/arrow-left.svg'
 
 import * as s from './Cart.module.sass'
-import { ErrorBoundary } from '../../hoc'
 
 
 const Cart = () => {

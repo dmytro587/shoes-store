@@ -1,6 +1,8 @@
 export { default as Button } from './common/Button/Button'
 export { default as FormControl } from './common/FormControl/FormControl'
 export { default as Alert } from './common/Alert/Alert'
+export { default as FullscreenLoader } from './common/FullscreenLoader/FullscreenLoader'
+
 export { default as Header } from './Header/Header'
 export { default as Categories } from './Categories/Categories'
 export { default as Sort } from './Sort/Sort'
