@@ -19,7 +19,8 @@ export const checkAndSetAppError = error => dispatch => {
    }
 }
 
-export const initializeApp = () => dispatch => {
+export const initializeApp = () => async dispatch => {
+   await delay()
    Promise.all([
       dispatch(autoLogin())
    ]).then(async () => {

@@ -3,5 +3,6 @@ module.exports = {
    loginValidator: require('./validators/login'),
    registrationValidator: require('./validators/registration'),
    resetPasswordValidator: require('./validators/resetPassword'),
-   newPasswordValidator: require('./validators/newPassword')
+   newPasswordValidator: require('./validators/newPassword'),
+   addProductValidator: require('./validators/addProduct')
 }

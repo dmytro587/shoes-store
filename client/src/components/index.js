@@ -18,4 +18,8 @@ export { default as SizesList } from './SizesList/SizesList'
 export { default as Pagination } from './Pagination/Pagination'
 export { default as LoginForm } from './LoginForm/LoginForm'
 export { default as RegistrationForm } from './RegistrationForm/RegistrationForm'
+export { default as AddProductForm } from './AddProductForm/AddProductForm'
+export { default as AddProduct } from './AddProduct/AddProduct'
+export { default as ProductsList } from './ProductsList/ProductsList'
+export { default as ProductsListItem } from './ProductsListItem/ProductsListItem'
 

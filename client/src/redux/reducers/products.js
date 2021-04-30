@@ -1,5 +1,4 @@
 import {
-   CLEAR_PRODUCTS,
    SET_IS_LOADING,
    SUCCESS_FETCHING_PRODUCTS,
    ERROR_FETCHING_PRODUCTS
@@ -9,7 +8,7 @@ const initialState = {
    products: [],
    totalCount: 0,
    isLoading: false,
-   error: null
+   error: null,
 }
 
 const productsReducer = (state = initialState, action) => {
@@ -27,7 +26,11 @@ const productsReducer = (state = initialState, action) => {
          const { message, response } = action.payload
          const error = response ? response.data : ({ message })
 
-         return { ...state, error }
+         return {
+            ...state,
+            isLoading: false,
+            error
+         }
       }
 
       case SET_IS_LOADING:
@@ -35,13 +38,6 @@ const productsReducer = (state = initialState, action) => {
             ...state,
             isLoading: action.payload
          }
-
-      case CLEAR_PRODUCTS:
-         return {
-            ...state,
-            products: [],
-            totalCount: 0
-      }
 
       default:
          return state

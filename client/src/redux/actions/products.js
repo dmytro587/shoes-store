@@ -1,11 +1,11 @@
 import {
-   CLEAR_PRODUCTS,
    SET_IS_LOADING,
    SUCCESS_FETCHING_PRODUCTS,
    ERROR_FETCHING_PRODUCTS
 } from '../actionTypes/products'
-import { productsAPI } from './../../api'
 import { checkAndSetAppError } from './app'
+import { setAlert } from './alert'
+import { productsAPI } from './../../api'
 
 const setIsLoading = bool => ({
    type: SET_IS_LOADING,
@@ -22,30 +22,43 @@ const errorFetching = error => ({
    payload: error
 })
 
-const clearProducts = {
-   type: CLEAR_PRODUCTS
-}
-
-export const fetchProducts = (filters, currentPage) => async (dispatch, getState) => {
+export const fetchProducts = () => async (dispatch, getState) => {
    dispatch(setIsLoading(true))
 
-   const token = getState().auth.token
-
-   if (!token) {
-      dispatch(clearProducts)
-   }
-
-   const pagination = {
+   const { price, sizes, category, pageLimit, currentPage } = getState().filters
+   const filters = {
       page: currentPage,
-      limit: getState().filters.pageLimit
+      limit: pageLimit,
+      price,
+      sizes,
+      category
    }
 
    try {
-      const { products, totalCount } = await productsAPI.fetchProducts(filters, pagination, token)
+      const { products, totalCount } = await productsAPI.fetchProducts(filters)
       dispatch(successFetching(products, totalCount))
    } catch (e) {
+      console.log(e)
       dispatch(checkAndSetAppError(e))
       dispatch(errorFetching(e.response.data))
-      dispatch(setIsLoading(false))
+   }
+}
+
+export const addProduct = formData => async dispatch => {
+   try {
+      const response = await productsAPI.addProduct(formData)
+      dispatch(setAlert(response.message))
+   } catch (e) {
+      console.log(e)
+      dispatch(setAlert(e.response.data.message, 'error'))
+   }
+}
+
+export const removeProduct = productId => async dispatch => {
+   try {
+      await productsAPI.removeById(productId)
+   } catch (e) {
+      console.log(e)
+      dispatch(setAlert(e.response.data.message, 'error'))
    }
 }

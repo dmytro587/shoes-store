@@ -1,4 +1,4 @@
-**Test account:** 
+**Test account with admin rights:** 
 * username: test
 * email: test@mail.ru
 * password: test

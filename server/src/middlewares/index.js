@@ -1,3 +1,4 @@
 module.exports = {
-   checkAuth: require('./checkAuth')
+   checkAuth: require('./checkAuth'),
+   checkRole: require('./checkRole')
 }

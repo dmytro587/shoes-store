@@ -1,8 +1,7 @@
 import { Form } from 'react-final-form'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
-import { getAlert, getError } from '../../redux/selectors/auth'
 import { newPassword } from '../../redux/actions/auth'
 
 import { Alert, FormControl, Button } from '../../components'
@@ -25,8 +24,6 @@ const validate = values => {
 const NewPassword = () => {
    const dispatch = useDispatch()
    const params = useParams()
-   const error = useSelector(getError)
-   const alert = useSelector(getAlert)
 
    const submitHandler = values => {
       const { password, confirm } = values
@@ -41,8 +38,7 @@ const NewPassword = () => {
             <form className={ s.form } onSubmit={ handleSubmit }>
                <h1 className={ s.title }>Введите новый пароль</h1>
 
-               { !!alert && <Alert msg={ alert } type="success" /> }
-               { !!error && <Alert msg={ error.message } type="error" /> }
+               <Alert />
 
                <FormControl label="Новый пароль" name="password" type="password" className={ s.input } />
                <FormControl label="Повторите пароль" name="confirm" type="password" className={ s.input } />

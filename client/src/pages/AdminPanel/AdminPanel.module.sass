@@ -1,0 +1,37 @@
+@import "./../../sass/variables"
+
+.wrapper
+   min-height: 74vh
+   display: grid
+   grid-template-columns: 1fr 4fr
+   grid-template-areas: 'sidebar body'
+   grid-gap: 30px
+
+.sidebar
+   display: flex
+   flex-direction: column
+   padding: 15px
+   grid-area: sidebar
+   background-color: #fff
+   box-shadow: 0 0 3px rgba(0, 0, 0, .2)
+   border-radius: 10px
+
+.body
+   grid-area: body
+
+.link
+   display: inline-block
+   margin-bottom: 10px
+   font-size: 1.1rem
+   text-decoration: none
+   color: $black
+   &.active
+      font-weight: 600
+
+.error
+   text-align: center
+   & > h1
+      font-size: 2rem
+      & > span
+         color: #f00
+

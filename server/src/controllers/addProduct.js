@@ -1,3 +1,0 @@
-exports.add = (req, res) => {
-
-}

@@ -16,7 +16,11 @@
 
    transition: background-color .25s linear, transfrom .25s ease, color .25s linear
    cursor: pointer
-   &:hover
+   &:disabled
+      background-color: rgba($black, .5)
+      color: #fff
+      border: none
+   &:not(:disabled):hover
       background-color: $orange
       color: #fff
       & .quantity
@@ -53,12 +57,12 @@
    color: #fff
    border: none
    transition: background-color .25s linear, transfrom .25s ease
-   &:hover
+   &:not(:disabled):hover
       background-color: darken($orange, 15%)
 
 .black
    background-color: $black
-   &:hover
+   &:not(:disabled):hover
       background-color: lighten($black, 20%)
 
 .outline
@@ -69,7 +73,7 @@
    transition: color .25s linear, background-color .25s linear
    & > img
       margin-right: 8px
-   &:hover
+   &:not(:disabled):hover
       color: #fff
       background-color: #D3D3D3
 

@@ -11,18 +11,18 @@ const range = (from, to) => {
    return res
 }
 
-const getPagination = (count, currentPage) => {
+const getPagination = (totalCount, currentPage) => {
    const startPages = []
    const endPages = []
 
-   if (count >= 10) {
+   if (totalCount >= 10) {
       startPages.push(...range(1, 3))
-      endPages.push(...range(count, count - 3))
+      endPages.push(...range(totalCount, totalCount - 3))
    }
 
    const pageNeighbours = 1
    const startPage = 1
-   const endPage = count
+   const endPage = totalCount
    const hasLeftSpill = currentPage > 3
    const hasRightSpill = endPage - currentPage > 3
    const hasSpillOffset = hasLeftSpill && hasRightSpill
@@ -75,8 +75,8 @@ const getPagination = (count, currentPage) => {
    return pagination
 }
 
-const Pagination = ({ count, currentPage, onPageClick }) => {
-   const pagination = getPagination(count, currentPage)
+const Pagination = ({ totalCount, currentPage, onPageClick, className }) => {
+   const pagination = getPagination(totalCount, currentPage)
 
    const changePageHandler = num => {
       onPageClick(num)
@@ -87,7 +87,7 @@ const Pagination = ({ count, currentPage, onPageClick }) => {
    }
 
    const onEndClick = () => {
-      onPageClick(count)
+      onPageClick(totalCount)
    }
 
    const pages = pagination.map(i => {
@@ -105,7 +105,7 @@ const Pagination = ({ count, currentPage, onPageClick }) => {
    })
 
    return (
-      <nav className={ s.wrapper }>
+      <nav className={ cn(s.wrapper, className) }>
          <button
             className={ s.arrowBtn }
             onClick={ onStartClick }
@@ -121,7 +121,7 @@ const Pagination = ({ count, currentPage, onPageClick }) => {
          <button
             className={ s.arrowBtn }
             onClick={ onEndClick }
-            disabled={ currentPage === count }
+            disabled={ currentPage === totalCount }
          >
             <svg focusable="false" viewBox="0 0 24 24">
                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>

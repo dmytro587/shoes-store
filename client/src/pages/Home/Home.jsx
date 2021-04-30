@@ -42,11 +42,7 @@ const Home = () => {
    }, [])
 
    useEffect(() => {
-      dispatch(fetchProducts({
-         price: priceSort,
-         sizes: sizeSort,
-         category: categorySort
-      }, currentPage))
+      dispatch(fetchProducts())
       // eslint-disable-next-line
    }, [priceSort, sizeSort, categorySort, currentPage, isAuthed])
 
@@ -102,42 +98,40 @@ const Home = () => {
    }
 
    return (
-      <div>
-         <div className="container">
-            <div className={ s.contentTop }>
-               <ErrorBoundary errorMsg="Что-то пошло не так">
-                  <Categories
-                     onSelectCategory={ onSelectCategory }
-                     items={ categoryNames }
-                     isLoading={ isLoading }
-                  />
-               </ErrorBoundary>
-               <ErrorBoundary errorMsg="Что-то пошло не так">
-                  <Sort items={ sortTypes } onSortClick={ onSortClick }/>
-               </ErrorBoundary>
-            </div>
+      <div className="container">
+         <div className={ s.contentTop }>
+            <ErrorBoundary errorMsg="Что-то пошло не так">
+               <Categories
+                  onSelectCategory={ onSelectCategory }
+                  items={ categoryNames }
+                  isLoading={ isLoading }
+               />
+            </ErrorBoundary>
+            <ErrorBoundary errorMsg="Что-то пошло не так">
+               <Sort items={ sortTypes } onSortClick={ onSortClick }/>
+            </ErrorBoundary>
+         </div>
 
-            <div className={ s.main }>
-               <ErrorBoundary errorMsg="Что-то пошло не так">
-                  <Sidebar/>
-               </ErrorBoundary>
+         <div className={ s.main }>
+            <ErrorBoundary errorMsg="Что-то пошло не так">
+               <Sidebar/>
+            </ErrorBoundary>
 
-               <div className={ s.body }>
-                  <div className={ s.content }>
-                     { getContent() }
-                  </div>
-                  {
-                     productsList.length > 0 ? (
-                        <ErrorBoundary>
-                           <Pagination
-                              currentPage={ currentPage }
-                              count={ totalPages }
-                              onPageClick={ onChangePage }
-                           />
-                        </ErrorBoundary>
-                     ) : null
-                  }
+            <div className={ s.body }>
+               <div className={ s.content }>
+                  { getContent() }
                </div>
+               {
+                  productsList.length > 0 ? (
+                     <ErrorBoundary>
+                        <Pagination
+                           currentPage={ currentPage }
+                           totalCount={ totalPages }
+                           onPageClick={ onChangePage }
+                        />
+                     </ErrorBoundary>
+                  ) : null
+               }
             </div>
          </div>
       </div>

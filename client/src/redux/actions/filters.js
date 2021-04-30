@@ -5,11 +5,6 @@ import {
    SET_SORT_BY_SIZES
 } from '../actionTypes/filters'
 
-export const setCategory = category => ({
-   type: SET_CATEGORY,
-   payload: category
-})
-
 export const setSortByPrice = (order = null, from = 0, to = 0) => ({
    type: SET_SORT_BY_PRICE,
    payload: { order, from, to }
@@ -24,4 +19,13 @@ export const setCurrentPage = currentPage => ({
    type: SET_CURRENT_PAGE,
    payload: currentPage
 })
+
+export const setCategory = category => dispatch => {
+   dispatch({
+      type: SET_CATEGORY,
+      payload: category
+   })
+   
+   dispatch(setCurrentPage(1))
+}
 

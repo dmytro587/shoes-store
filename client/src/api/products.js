@@ -2,18 +2,17 @@ import { instance } from './api'
 import { delay } from '../utils'
 
 const productsAPI = {
-   async fetchProducts(sortByObj, pagination) {
+   async fetchProducts(filters) {
       await delay()
 
-      const { price, sizes, category } = sortByObj
-      const { page, limit } = pagination
+      const { price, sizes, category, page, limit } = filters
 
       const limitUrl = limit
-         ? `limit=${limit}&`
+         ? `limit=${ limit }&`
          : ''
 
       const pageUrl = page >= 1
-         ? `page=${page}&`
+         ? `page=${ page }&`
          : ''
 
       const sizesUrl = sizes.length > 0
@@ -21,14 +20,14 @@ const productsAPI = {
          : ''
 
       const categoryUrl = (category !== 'all') && category
-         ? `category=${category}&` : ''
+         ? `category=${ category }&` : ''
 
       const priceRangeUrl = !price.order
-         ? `priceRange=${price.from || 0}-${price.to || 0}&` : ''
+         ? `priceRange=${ price.from || 0 }-${ price.to || 0 }&` : ''
 
       const priceSortUrl = price.order ? (
          price.order === 'asc' ? `priceSort=asc&` :
-         price.order === 'desc' ? `priceSort=desc&` : ''
+            price.order === 'desc' ? `priceSort=desc&` : ''
       ) : ''
 
       const url = ['products?']
@@ -43,6 +42,30 @@ const productsAPI = {
       const response = await instance.get(url.join(''))
 
       return response.data
+   },
+
+   async addProduct(productData) {
+      const { name, price, imgUrl, sizes, categories } = productData
+
+      const response = await instance.post('products/add-product', {
+         name, price, imgUrl, sizes, categories
+      })
+
+      return response.data
+   },
+
+   async getProductById(productId) {
+      const response = await instance.get(`products/${ productId }`)
+
+      return response.data
+   },
+
+   removeById(productId) {
+      return instance.delete(`products/remove/${ productId }`)
+   },
+
+   async editById(productId) {
+
    }
 }
 

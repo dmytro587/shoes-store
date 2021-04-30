@@ -1,0 +1,43 @@
+@import "./../../sass/variables"
+
+.item
+   padding: 15px 10px
+   display: flex
+   justify-content: space-between
+   align-items: center
+   transition: background-color .2s ease
+   &:not(:last-child)
+      border-bottom: 1px solid $gray-light
+   &:hover
+      background-color: rgba(#f1f6fc, .5)
+
+.left
+   display: flex
+   align-items: center
+
+.name
+   max-width: 80%
+   cursor: pointer
+
+.img
+   margin-right: 15px
+   width: 48px
+   height: 48px
+   border-radius: 5px
+   overflow: hidden
+   & > img
+      width: 100%
+      height: 100%
+      object-position: center
+      object-fit: cover
+
+.actions
+   display: flex
+   & > button
+      cursor: pointer
+      transition: opacity .1s ease
+      &:hover
+         opacity: .8
+   & > button.remove
+      margin-left: 10px
+      color: #c62828

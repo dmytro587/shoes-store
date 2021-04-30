@@ -2,31 +2,12 @@ import { Form } from 'react-final-form'
 
 import Button from '../common/Button/Button'
 import { Alert, FormControl } from '../index'
+import { requiredFieldValidator } from '../../utils'
 
 import * as s from './RegistrationForm.module.sass'
 
 
-const validate = values => {
-   const errors = {}
-
-   if (!values.username) {
-      errors.username = '*поле обязательно'
-   }
-   if (!values.email) {
-      errors.email = '*поле обязательно'
-   }
-   if (!values.password) {
-      errors.password = '*поле обязательно'
-   }
-   if (!values.confirm) {
-      errors.confirm = '*поле обязательно'
-   }
-
-   return errors
-}
-
-
-const RegistrationForm = ({ onSubmit, error }) => {
+const RegistrationForm = ({ onSubmit}) => {
    const submitHandler = values => {
       onSubmit(values)
    }
@@ -34,11 +15,10 @@ const RegistrationForm = ({ onSubmit, error }) => {
    return (
       <Form
          onSubmit={ submitHandler }
-         validate={ validate }
+         validate={ values => requiredFieldValidator(values, ['username', 'email', 'password', 'confirm']) }
          render={ ({ handleSubmit }) => (
             <form className={ s.form } onSubmit={ handleSubmit }>
-
-               { !!error && <Alert msg={ error.message } type="error" /> }
+               <Alert />
 
                <FormControl label="Ваше имя" name="username" />
                <FormControl label="Email" name="email" type="email" />

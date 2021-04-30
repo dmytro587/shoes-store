@@ -19,7 +19,7 @@ class ErrorBoundary extends Component {
    }
 
    render() {
-      const { errorMsg, FallbackComponent, isEmpty, defaultRender } = this.props
+      const { errorMsg, FallbackComponent, isEmpty, pageRender } = this.props
 
       if (this.state.hasError) {
          const error = errorMsg || this.state.error.message
@@ -30,7 +30,7 @@ class ErrorBoundary extends Component {
             return <FallbackComponent error={ error } />
          }
 
-         if (defaultRender) {
+         if (pageRender) {
             return (
                <div className={ s.wrapper }>
                   <h1>Что-то пошло не так, попробуйте позже</h1>

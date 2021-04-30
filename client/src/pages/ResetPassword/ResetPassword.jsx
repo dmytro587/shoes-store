@@ -1,7 +1,6 @@
 import { Form } from 'react-final-form'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
-import { getAlert, getError } from '../../redux/selectors/auth'
 import { resetPassword } from '../../redux/actions/auth'
 
 import { Alert, FormControl, Button } from '../../components'
@@ -21,8 +20,6 @@ const validate = values => {
 
 const ResetPassword = () => {
    const dispatch = useDispatch()
-   const error = useSelector(getError)
-   const alert = useSelector(getAlert)
 
    const submitHandler = values => {
       dispatch(resetPassword(values.email))
@@ -39,8 +36,7 @@ const ResetPassword = () => {
                   После отправки формы, вы получите письмо с просьбой о подтверждении запроса, а так же ссылкой на дальнейшие инструкции.
                </p>
 
-               { !!alert && <Alert msg={ alert } type="success" /> }
-               { !!error && <Alert msg={ error.message } type="error" /> }
+               <Alert />
 
                <FormControl label="Email" name="email" type="email" className={ s.input } />
 

@@ -40,6 +40,10 @@ const authAPI = {
       })
 
       return response.data
+   },
+
+   checkAccess() {
+      return instance.get('auth/check-access')
    }
 }
 

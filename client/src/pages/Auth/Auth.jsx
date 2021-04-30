@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import cn from 'classnames'
 
 import { login, registration } from '../../redux/actions/auth'
-import { getAlert, getError, getIsAuthed, getIsRegistered } from '../../redux/selectors/auth'
+import { getIsAuthed, getIsRegistered } from '../../redux/selectors/auth'
 import { LoginForm, RegistrationForm } from '../../components'
 
 import * as s from './Auth.module.sass'
@@ -14,8 +14,6 @@ const Auth = () => {
    const dispatch = useDispatch()
    const history = useHistory()
    const isAuthed = useSelector(getIsAuthed)
-   const error = useSelector(getError)
-   const alert = useSelector(getAlert)
    const isRegistered = useSelector(getIsRegistered)
 
    useEffect(() => {
@@ -66,12 +64,12 @@ const Auth = () => {
 
          <Route exact path="/auth/login">
             <ErrorBoundary errorMsg="Что-то пошло не так">
-               <LoginForm alert={ alert } error={ error } onSubmit={ onLogin }/>
+               <LoginForm onSubmit={ onLogin }/>
             </ErrorBoundary>
          </Route>
          <Route exact path="/auth/registration">
             <ErrorBoundary errorMsg="Что-то пошло не так">
-               <RegistrationForm error={ error } onSubmit={ onRegister }/>
+               <RegistrationForm onSubmit={ onRegister }/>
             </ErrorBoundary>
          </Route>
       </div>

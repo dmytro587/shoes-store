@@ -17,7 +17,7 @@ ReactDOM.render(
    <React.StrictMode>
       <Router history={ history }>
          <Provider store={ store }>
-            <ErrorBoundary>
+            <ErrorBoundary pageRender>
                <App />
             </ErrorBoundary>
          </Provider>

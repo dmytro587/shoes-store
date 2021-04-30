@@ -10,7 +10,7 @@ import {
    SET_ADDING_STATE
 } from '../actionTypes/cart'
 
-import { setAlert } from './auth'
+import { setAlert } from './alert'
 import { checkAndSetAppError } from './app'
 import { delay, history } from '../../utils'
 

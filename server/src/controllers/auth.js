@@ -23,6 +23,12 @@ exports.autoLogin = (req, res) => {
    })
 }
 
+exports.checkAccess = (req, res) => {
+   res.status(200).json({
+      message: 'Доступ разрешен'
+   })
+}
+
 exports.login = async (req, res) => {
    const errors = validationResult(req)
 

@@ -9,7 +9,8 @@ const Button = ({
     onClick,
     black,
     small,
-    className
+    className,
+   ...rest
 }) => (
    <button
       className={
@@ -21,6 +22,7 @@ const Button = ({
          })
       }
       onClick={ onClick }
+      { ...rest }
    >
       { children }
       {

@@ -7,7 +7,7 @@ import { getIsInitialized } from './redux/selectors/app'
 
 import { PrivateRouter, withAppErrorHandling } from './hoc'
 import { FullscreenLoader, Header } from './components'
-import { Home, Cart, Auth, ResetPassword, NewPassword } from './pages'
+import { Home, Cart, Auth, ResetPassword, NewPassword, AdminPanel } from './pages'
 
 const App = () => {
    const dispatch = useDispatch()
@@ -31,6 +31,7 @@ const App = () => {
                <PrivateRouter exact path="/cart" component={ Cart }/>
                <Route path="/home" component={ Home }/>
                <Route path="/auth" component={ Auth }/>
+               <Route path="/admin" component={ AdminPanel }/>
                <Route path="/reset-password" component={ ResetPassword }/>
                <Route path="/new-password/:token" component={ NewPassword }/>
                <Redirect to="/home"/>

@@ -1,18 +1,17 @@
 import {
-   CLEAR_ALERT,
    LOGIN_SUCCESS,
    LOGOUT,
    REGISTER_SUCCESS,
-   SET_ALERT,
-   SET_ERROR
+   SET_ERROR,
+   SET_IS_CHECKED
 } from '../actionTypes/auth'
 
 const initialState = {
    token: null,
    isRegistered: false,
    isAuthed: false,
-   alert: null,
-   error: null
+   error: null,
+   isChecked: false
 }
 
 const authReducer = (state = initialState, action) => {
@@ -24,12 +23,14 @@ const authReducer = (state = initialState, action) => {
             isAuthed: true,
             error: null
          }
+
       case REGISTER_SUCCESS:
          return {
             ...state,
             isRegistered: true,
             error: null
          }
+
       case LOGOUT:
          return {
             ...state,
@@ -37,22 +38,19 @@ const authReducer = (state = initialState, action) => {
             isAuthed: false,
             error: null
          }
+
       case SET_ERROR:
          return {
             ...state,
             error: action.payload
          }
-      case SET_ALERT:
+
+      case SET_IS_CHECKED:
          return {
             ...state,
-            alert: action.payload,
-            error: null
+            isChecked: action.payload
          }
-      case CLEAR_ALERT:
-         return {
-            ...state,
-            alert: null
-         }
+
       default: return state
    }
 }

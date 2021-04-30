@@ -3,7 +3,8 @@ import {
    FETCH_CART_INFO_SUCCESS,
    FETCH_CART_SUCCESS,
    SET_REMOVING_STATE,
-   SET_IS_LOADED, SET_ADDING_STATE
+   SET_IS_LOADED,
+   SET_ADDING_STATE
 } from '../actionTypes/cart'
 
 const initialState = {

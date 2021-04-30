@@ -1,6 +1,6 @@
 const router = require('express').Router()
 
-const { checkAuth } = require('../../middlewares')
+const { checkAuth, checkRole } = require('../../middlewares')
 const { auth } = require('./../../controllers')
 const {
    loginValidator,
@@ -9,8 +9,10 @@ const {
    newPasswordValidator
 } = require('./../../utils')
 
+const { admin: adminRole } = require('../../config/roles')
 
 router.get('/check-auth', checkAuth, auth.autoLogin)
+router.get('/check-access', checkRole([adminRole]), auth.checkAccess)
 
 router.post('/login', loginValidator, auth.login)
 router.post('/registration', registrationValidator, auth.registration)

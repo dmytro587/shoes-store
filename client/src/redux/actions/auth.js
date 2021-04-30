@@ -1,21 +1,28 @@
 import {
-   CLEAR_ALERT,
    LOGIN_SUCCESS,
    LOGOUT,
    REGISTER_SUCCESS,
-   SET_ALERT,
-   SET_ERROR
+   SET_ERROR,
+   SET_IS_CHECKED
 } from '../actionTypes/auth'
 import { checkAndSetAppError } from './app'
 import { authAPI } from '../../api'
-import { history } from './../../utils'
+import { delay, history } from './../../utils'
+import { setAlert } from './alert'
 
 const registerSuccess = {
    type: REGISTER_SUCCESS
 }
 
-const clearAlert = {
-   type: CLEAR_ALERT
+const loginSuccess = token => ({
+   type: LOGIN_SUCCESS,
+   payload: token
+})
+
+
+export const logout = () => {
+   localStorage.removeItem('token')
+   return { type: LOGOUT }
 }
 
 const setError = error => ({
@@ -23,26 +30,11 @@ const setError = error => ({
    payload: error
 })
 
-const loginSuccess = token => ({
-   type: LOGIN_SUCCESS,
-   payload: token
+
+const setIsChecked = bool => ({
+   type: SET_IS_CHECKED,
+   payload: bool
 })
-
-export const logout = () => {
-   localStorage.removeItem('token')
-   return { type: LOGOUT }
-}
-
-export const setAlert = (msg, timeout = 10000) => dispatch => {
-   dispatch({
-      type: SET_ALERT,
-      payload: msg
-   })
-
-   setTimeout(() => {
-      dispatch(clearAlert)
-   }, timeout)
-}
 
 export const login = loginData => async dispatch => {
    try {
@@ -52,7 +44,7 @@ export const login = loginData => async dispatch => {
    } catch (e) {
       console.log(e)
       dispatch(checkAndSetAppError(e))
-      dispatch(setError(e.response.data))
+      dispatch(setAlert(e.response.data.message, 'error'))
    }
 }
 
@@ -70,6 +62,20 @@ export const autoLogin = () => async dispatch => {
    }
 }
 
+export const checkAccess = () => async dispatch => {
+   try {
+      await delay()
+      await authAPI.checkAccess()
+   } catch (e) {
+      console.log(e)
+      dispatch(setError(e.response.data))
+      dispatch(setAlert(e.response.data.message, 'error'))
+      dispatch(checkAndSetAppError(e))
+   } finally {
+      dispatch(setIsChecked(true))
+   }
+}
+
 export const registration = registerData => async dispatch => {
    try {
       await authAPI.registration(registerData)
@@ -77,7 +83,7 @@ export const registration = registerData => async dispatch => {
    } catch (e) {
       console.log(e)
       dispatch(checkAndSetAppError(e))
-      dispatch(setError(e.response.data))
+      dispatch(setAlert(e.response.data.message, 'error'))
    }
 }
 
@@ -88,18 +94,19 @@ export const resetPassword = email => async dispatch => {
    } catch (e) {
       console.log(e)
       dispatch(checkAndSetAppError(e))
-      dispatch(setError(e.response.data))
+      dispatch(setAlert(e.response.data.message, 'error'))
    }
 }
 
 export const newPassword = (password, confirm, token) => async dispatch => {
    try {
       const { message } = await authAPI.newPassword(password, confirm, token)
+
       dispatch(setAlert(message))
       history.push('/auth/login')
    } catch (e) {
       console.log(e)
       dispatch(checkAndSetAppError(e))
-      dispatch(setError(e.response.data))
+      dispatch(setAlert(e.response.data.message, 'error'))
    }
 }

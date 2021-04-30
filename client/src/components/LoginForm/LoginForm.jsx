@@ -1,28 +1,13 @@
 import { Form } from 'react-final-form'
-
-import Button from '../common/Button/Button'
-import { Alert, FormControl } from '../index'
-
-import * as s from './LoginForm.module.sass'
 import { Link } from 'react-router-dom'
 
-const validate = values => {
-   const errors = {}
+import { Alert, FormControl, Button } from '../index'
+import { requiredFieldValidator } from '../../utils'
 
-   if (!values.username) {
-      errors.username = '*поле обязательно'
-   }
-   if (!values.email) {
-      errors.email = '*поле обязательно'
-   }
-   if (!values.password) {
-      errors.password = '*поле обязательно'
-   }
+import * as s from './LoginForm.module.sass'
 
-   return errors
-}
 
-const LoginForm = ({ onSubmit, error, alert }) => {
+const LoginForm = ({ onSubmit }) => {
    const submitHandler = values => {
       onSubmit(values)
    }
@@ -30,11 +15,10 @@ const LoginForm = ({ onSubmit, error, alert }) => {
    return (
       <Form
          onSubmit={ submitHandler }
-         validate={ validate }
+         validate={ values => requiredFieldValidator(values, ['username', 'email', 'password']) }
          render={ ({ handleSubmit }) => (
             <form className={ s.form } onSubmit={ handleSubmit }>
-               { !!alert && <Alert msg={ alert } type="success" /> }
-               { !!error && <Alert msg={ error.message } type="error" /> }
+               <Alert />
 
                <FormControl label="Ваше имя" name="username" />
                <FormControl label="Email" name="email" type="email" />
@@ -43,6 +27,7 @@ const LoginForm = ({ onSubmit, error, alert }) => {
                <Link to="/reset-password" className={ s.link }>
                   Забыли пароль?
                </Link>
+
                <Button type="submit" fill black small>Войти</Button>
             </form>
          ) }
