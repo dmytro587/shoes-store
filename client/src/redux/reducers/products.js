@@ -1,7 +1,8 @@
 import {
    SET_IS_LOADING,
    SUCCESS_FETCHING_PRODUCTS,
-   ERROR_FETCHING_PRODUCTS
+   ERROR_FETCHING_PRODUCTS,
+   REMOVE_PRODUCT_SUCCESS
 } from '../actionTypes/products'
 
 const initialState = {
@@ -30,6 +31,15 @@ const productsReducer = (state = initialState, action) => {
             ...state,
             isLoading: false,
             error
+         }
+      }
+
+      case REMOVE_PRODUCT_SUCCESS: {
+         const totalCount = state.totalCount
+
+         return {
+            ...state,
+            totalCount: totalCount >= 2 ? totalCount - 1 : totalCount
          }
       }
 

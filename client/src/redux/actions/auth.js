@@ -19,12 +19,6 @@ const loginSuccess = token => ({
    payload: token
 })
 
-
-export const logout = () => {
-   localStorage.removeItem('token')
-   return { type: LOGOUT }
-}
-
 const setError = error => ({
    type: SET_ERROR,
    payload: error
@@ -35,6 +29,12 @@ const setIsChecked = bool => ({
    type: SET_IS_CHECKED,
    payload: bool
 })
+
+export const logout = () => {
+   localStorage.removeItem('token')
+   history.push('/home')
+   return { type: LOGOUT }
+}
 
 export const login = loginData => async dispatch => {
    try {

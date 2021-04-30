@@ -3,7 +3,7 @@ const router = require('express').Router()
 const { products } = require('./../../controllers')
 const { addProductValidator } = require('./../../utils')
 const { checkRole } = require('./../../middlewares')
-const { admin: adminRole } = require('./../../config')
+const { admin: adminRole } = require('./../../config/roles')
 
 router.get('/', products.getProducts)
 router.get('/:id', products.getProductById)

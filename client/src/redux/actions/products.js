@@ -1,7 +1,8 @@
 import {
    SET_IS_LOADING,
    SUCCESS_FETCHING_PRODUCTS,
-   ERROR_FETCHING_PRODUCTS
+   ERROR_FETCHING_PRODUCTS,
+   REMOVE_PRODUCT_SUCCESS
 } from '../actionTypes/products'
 import { checkAndSetAppError } from './app'
 import { setAlert } from './alert'
@@ -22,13 +23,17 @@ const errorFetching = error => ({
    payload: error
 })
 
-export const fetchProducts = () => async (dispatch, getState) => {
+const removeProductSuccess = {
+   type: REMOVE_PRODUCT_SUCCESS
+}
+
+export const fetchProducts = limit => async (dispatch, getState) => {
    dispatch(setIsLoading(true))
 
    const { price, sizes, category, pageLimit, currentPage } = getState().filters
    const filters = {
       page: currentPage,
-      limit: pageLimit,
+      limit: limit || pageLimit,
       price,
       sizes,
       category
@@ -57,6 +62,7 @@ export const addProduct = formData => async dispatch => {
 export const removeProduct = productId => async dispatch => {
    try {
       await productsAPI.removeById(productId)
+      dispatch(removeProductSuccess)
    } catch (e) {
       console.log(e)
       dispatch(setAlert(e.response.data.message, 'error'))

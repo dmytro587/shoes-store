@@ -20,7 +20,7 @@ const ProductsList = () => {
    const isLoading = useSelector(getIsLoading)
 
    useEffect(() => {
-      dispatch(fetchProducts())
+      dispatch(fetchProducts(8))
       // eslint-disable-next-line
    }, [totalCount, currentPage])
 
@@ -61,7 +61,7 @@ const ProductsList = () => {
 
             <div>
                {
-                  products.map(item => (
+                  !isLoading ? products.map(item => (
                      <ProductsListItem
                         key={ item._id }
                         id={ item._id }
@@ -70,7 +70,15 @@ const ProductsList = () => {
                         onRemoveClick={ onRemoveClick }
                         onEditClick={ editProduct }
                      />
-                  ))
+                  )) : (
+                     <Loader
+                        type="Oval"
+                        color="#000"
+                        height={ 60 }
+                        width={ 60 }
+                        className={ s.loader }
+                     />
+                  )
                }
             </div>
          </div>

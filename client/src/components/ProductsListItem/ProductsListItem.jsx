@@ -19,12 +19,22 @@ const ProductsListItem = ({ id, name, imgUrl, onRemoveClick = noop, onEditClick 
            <div className={ s.img }>
               <img src={ imgUrl } alt=""/>
            </div>
-           <p className={ s.name }>{ name }</p>
+
+           <p
+              className={ s.name }
+              onClick={ editHandler }
+           >
+              { name }
+           </p>
         </div>
 
          <div className={ s.actions }>
             <button onClick={ editHandler }>Редактировать</button>
-            <button className={ s.remove } onClick={ removeHandler }>
+
+            <button
+               className={ s.remove }
+               onClick={ removeHandler }
+            >
                Удалить
             </button>
          </div>

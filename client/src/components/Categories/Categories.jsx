@@ -4,7 +4,7 @@ import cn from 'classnames'
 
 import * as s from './Categories.module.sass'
 
-const Categories = ({ items, isLoading, onSelectCategory }) => {
+const Categories = ({ items, isLoaded, onSelectCategory }) => {
    const [activeCategory, setActiveCategory] = useState(0)
 
    const onCategoryClickHandler = (index, type) => {
@@ -21,7 +21,7 @@ const Categories = ({ items, isLoading, onSelectCategory }) => {
                   to={`/home?category=${obj.type}`}
                   className={ cn(s.item, { [s.active]: index === activeCategory }) }
                   onClick={ () => onCategoryClickHandler(index, obj.type) }
-                  disabled={ isLoading }
+                  disabled={ isLoaded }
                >
                   { obj.name }
                </Link>
