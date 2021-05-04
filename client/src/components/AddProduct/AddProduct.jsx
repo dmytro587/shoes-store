@@ -1,10 +1,7 @@
 import { useDispatch } from 'react-redux'
 
 import { addProduct } from '../../redux/actions/products'
-import { AddProductForm } from '../index'
-
-import * as s from './AddProduct.module.sass'
-
+import { ProductForm } from '../index'
 
 const AddProduct = () => {
    const dispatch = useDispatch()
@@ -14,10 +11,10 @@ const AddProduct = () => {
    }
 
    return (
-      <div className={ s.wrapper }>
-         <h1 className={ s.title }>Добавить товар</h1>
+      <div className="admin-form-wrapper">
+         <h1 className="admin-title">Добавить товар</h1>
 
-         <AddProductForm onSubmit={ onAddProduct } />
+         <ProductForm onSubmit={ onAddProduct } submitButtonText="Добавить товар" />
       </div>
    )
 }

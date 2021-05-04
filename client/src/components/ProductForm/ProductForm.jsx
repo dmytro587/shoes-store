@@ -4,28 +4,10 @@ import Select from 'react-select'
 import { Alert, FormControl, Button } from '../index'
 import { requiredFieldValidator } from '../../utils'
 
-import * as s from './AddProductForm.module.sass'
+import * as s from './ProductForm.module.sass'
 
-
-const sizes = Array.from({ length: 10 }, (_, i) => ({
-   value: 35 + i,
-   label: String(35 + i)
-}))
-
-const categories = [
-   { label: 'Ботинки', value: 'boots' },
-   { label: 'Кроссовки', value: 'trainers' }
-]
-
-const getMappedValues = values => Array.isArray(values) ? values.map(item => item.value ? item.value : item) : values
-
-const MultiSelect = ({ input, ...rest }) => (
-   <Select isMulti { ...input } { ...rest }/>
-)
-
-const AddProductForm = ({ onSubmit = () => {} }) => {
-
-   const submitHandler = async values => {
+const ProductForm = ({ onSubmit = noop, submitButtonText, initialValues }) => {
+   const submitHandler = values => {
       onSubmit({
          ...values,
          sizes: getMappedValues(values.sizes),
@@ -36,6 +18,11 @@ const AddProductForm = ({ onSubmit = () => {} }) => {
    return (
       <Form
          onSubmit={ submitHandler }
+         initialValues={ initialValues && {
+            ...initialValues,
+            categories: categories.find(item => item.value === initialValues.categories[0]),
+            sizes: sizes.find(item => item.value === initialValues.sizes[0]),
+         } }
          validate={ values => requiredFieldValidator(values, ['name', 'price', 'imgUrl', 'sizes', 'categories']) }
          render={ ({ handleSubmit, form, submitting, pristine, }) => (
             <form
@@ -65,7 +52,7 @@ const AddProductForm = ({ onSubmit = () => {} }) => {
                />
 
                <Button type="submit" fill black small className={ s.button } disabled={ submitting || pristine }>
-                  Добавить товар
+                  { submitButtonText || 'Отправить' }
                </Button>
                <Button type="button" onClick={ form.reset } outline small disabled={ pristine }>
                   Сбросить
@@ -76,4 +63,28 @@ const AddProductForm = ({ onSubmit = () => {} }) => {
    )
 }
 
-export default AddProductForm
+const noop = () => {}
+
+const sizes = Array.from({ length: 10 }, (_, i) => ({
+   value: 35 + i,
+   label: String(35 + i)
+}))
+
+const categories = [
+   { label: 'Ботинки', value: 'boots' },
+   { label: 'Кроссовки', value: 'trainers' }
+]
+
+const getMappedValues = values => {
+   if (Array.isArray(values)) {
+      return values.map(item => item.value ? item.value : item)
+   } else if (typeof values === 'object') {
+      return values.value
+   }
+}
+
+const MultiSelect = ({ input, ...rest }) => (
+   <Select isMulti { ...input } { ...rest }/>
+)
+
+export default ProductForm

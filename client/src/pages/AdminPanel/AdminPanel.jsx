@@ -5,7 +5,7 @@ import { NavLink, Route } from 'react-router-dom'
 import { checkAccess } from '../../redux/actions/auth'
 import { getError, getIsChecked } from '../../redux/selectors/auth'
 
-import { AddProduct, FullscreenLoader, ProductsList } from '../../components'
+import { AddProduct, FullscreenLoader, ProductEdit, ProductsList } from '../../components'
 
 import * as s from './AdminPanel.module.sass'
 
@@ -50,7 +50,7 @@ const AdminPanel = () => {
                      to={ link.to }
                      className={ s.link }
                      activeClassName={ s.active }
-                     isActive={(_, { pathname }) => link.path && link.path.includes(pathname )}
+                     isActive={ (_, { pathname }) => link.path && link.path.includes(pathname) }
                   >
                      { link.text }
                   </NavLink>
@@ -59,9 +59,10 @@ const AdminPanel = () => {
          </div>
 
          <div className={ s.body }>
-            <Route exact path="/admin" component={ AddProduct } />
+            <Route exact path="/admin" component={ AddProduct }/>
             <Route path="/admin/add-product" component={ AddProduct }/>
             <Route path="/admin/products-list" component={ ProductsList }/>
+            <Route path="/admin/edit/:id" component={ ProductEdit }/>
          </div>
       </div>
    )

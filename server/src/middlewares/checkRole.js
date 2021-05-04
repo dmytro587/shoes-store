@@ -19,7 +19,6 @@ module.exports = roles => (req, res, next) => {
 
       roles.forEach(role => {
          if (userRoles.includes(role)) {
-            console.log('role', role)
             hasAccess = true
          }
       })

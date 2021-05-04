@@ -64,8 +64,16 @@ const productsAPI = {
       return instance.delete(`products/remove/${ productId }`)
    },
 
-   async editById(productId) {
+   async editById(productId, { name, price, imgUrl, sizes, categories }) {
 
+      return instance.put('products/edit', {
+         id: productId,
+         name,
+         price,
+         imgUrl,
+         sizes,
+         categories
+      })
    }
 }
 

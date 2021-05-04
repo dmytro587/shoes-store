@@ -68,3 +68,22 @@ export const removeProduct = productId => async dispatch => {
       dispatch(setAlert(e.response.data.message, 'error'))
    }
 }
+
+export const editProduct = (productId, productData) => async dispatch => {
+   try {
+      await productsAPI.editById(productId, productData)
+      dispatch(setAlert('Товар успешно изменён'))
+   } catch (e) {
+      console.log(e)
+      dispatch(setAlert(e.response.data.message, 'error'))
+   }
+}
+
+export const fetchProductById = async productId => {
+   try {
+      return await productsAPI.getProductById(productId)
+   } catch (e) {
+      console.log(e)
+   }
+}
+

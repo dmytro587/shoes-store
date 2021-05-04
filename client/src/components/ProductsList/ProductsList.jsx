@@ -1,5 +1,6 @@
 import { Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import Loader from 'react-loader-spinner'
 
 import { fetchProducts, removeProduct } from '../../redux/actions/products'
@@ -11,7 +12,9 @@ import { Alert, Pagination, ProductsListItem } from '../index'
 
 import * as s from './ProductsList.module.sass'
 
+
 const ProductsList = () => {
+   const history = useHistory()
    const dispatch = useDispatch()
    const products = useSelector(getProducts)
    const currentPage = useSelector(getCurrentPage)
@@ -45,13 +48,13 @@ const ProductsList = () => {
       dispatch(removeProduct(productId))
    }
 
-   const editProduct = productId => {
-      alert('В разработке...')
+   const onEditClick = productId => {
+      history.push(`/admin/edit/${ productId }`)
    }
 
    return (
       <Fragment>
-         <Alert />
+         <Alert/>
 
          <div className={ s.wrapper }>
             <div className={ s.header }>
@@ -68,7 +71,7 @@ const ProductsList = () => {
                         name={ item.name }
                         imgUrl={ item.imgUrl }
                         onRemoveClick={ onRemoveClick }
-                        onEditClick={ editProduct }
+                        onEditClick={ onEditClick }
                      />
                   )) : (
                      <Loader

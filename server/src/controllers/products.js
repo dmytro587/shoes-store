@@ -138,7 +138,7 @@ exports.edit = async (req, res) => {
          })
       }
 
-      Object.keys(req.body).map(key => {
+      Object.keys(req.body).forEach(key => {
          if (key !== 'id' && req.body[key]) {
             product[key] = req.body[key]
          }
