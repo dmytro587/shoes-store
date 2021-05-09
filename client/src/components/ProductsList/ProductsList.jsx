@@ -8,7 +8,8 @@ import { getIsLoading, getProducts, getTotalCount, getTotalPages } from '../../r
 import { getCurrentPage } from '../../redux/selectors/filters'
 import { setCurrentPage } from '../../redux/actions/filters'
 
-import { Alert, Pagination, ProductsListItem } from '../index'
+import { ProductsListItem } from './components'
+import { Alert, Pagination } from '../index'
 
 import * as s from './ProductsList.module.sass'
 

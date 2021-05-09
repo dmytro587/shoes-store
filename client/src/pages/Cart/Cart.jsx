@@ -16,12 +16,9 @@ import {
    getTotalCount,
    getTotalPrice
 } from '../../redux/selectors/cart'
-import {
-   Button,
-   CartItem,
-   CartItemLoader,
-   EmptyCart
-} from '../../components'
+
+import { Button } from '../../components'
+import { CartItem, CartItemLoader, EmptyCart } from './components'
 import { ErrorBoundary } from '../../hoc'
 
 import grayLogoSvg from './../../assets/images/gray-basket.svg'

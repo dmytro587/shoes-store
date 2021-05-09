@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux'
 
 import { setSortByPrice, setSortBySize } from '../../redux/actions/filters'
-import { PriceForm, SizeForm } from '../index'
+import { PriceForm, SizeForm } from './components'
 
 import * as s from './Sidebar.module.sass'
 

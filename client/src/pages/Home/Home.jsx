@@ -10,14 +10,8 @@ import { getError, getIsLoading, getProducts, getTotalPages } from '../../redux/
 import { getIsAuthed } from '../../redux/selectors/auth'
 
 import { ErrorBoundary } from '../../hoc'
-import {
-   Categories,
-   Sort,
-   ProductLoader,
-   ProductCard,
-   Sidebar,
-   Pagination
-} from '../../components'
+import { ProductLoader, ProductCard, Categories, Sort } from './components'
+import { Sidebar, Pagination } from '../../components'
 
 import { sortTypes, categoryNames } from './../../config'
 

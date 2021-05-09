@@ -18,16 +18,16 @@ const App = () => {
    }, [])
 
    if (!isInitialized) {
-      return <FullscreenLoader />
+      return <FullscreenLoader/>
    }
 
    return (
       <div className="wrapper">
          <Header/>
 
-         <MainRouterConfig />
+         <MainRouterConfig/>
       </div>
-)
+   )
 }
 
 export default withAppErrorHandling(App)

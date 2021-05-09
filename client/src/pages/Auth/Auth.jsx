@@ -5,7 +5,7 @@ import cn from 'classnames'
 
 import { login, registration } from '../../redux/actions/auth'
 import { getIsAuthed, getIsRegistered } from '../../redux/selectors/auth'
-import { LoginForm, RegistrationForm } from '../../components'
+import { LoginForm, RegistrationForm } from './components'
 
 import * as s from './Auth.module.sass'
 import { ErrorBoundary } from '../../hoc'

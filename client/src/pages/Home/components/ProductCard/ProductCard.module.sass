@@ -1,0 +1,80 @@
+@import "./../../../../sass/variables"
+
+.loader
+   display: inline-flex
+   align-items: center
+   margin-right: -3px
+
+.btn
+   padding: 10px 20px
+   & > span
+      margin-left: 10px
+
+.imgWrapper
+   width: 100%
+   height: 270px
+   border-radius: 25px
+   overflow: hidden
+   position: relative
+
+   background-color: #f3f3f3
+   transition: box-shadow .4s ease, transform .4s ease
+   cursor: pointer
+   &:hover
+      box-shadow: 0 4px 10px rgba(0, 0, 0, .3)
+      transform: translateY(-5px)
+      & .overlay
+         opacity: 1
+   & img
+      width: 100%
+      height: 100%
+      object-fit: cover
+   .overlay
+      position: absolute
+      top: 0
+      bottom: 0
+      left: 0
+      right: 0
+
+      display: flex
+      justify-content: center
+      align-items: center
+
+      background-color: rgba(#000, .7)
+      opacity: 0
+      transition: opacity .35s ease
+      & > p
+         max-width: 80%
+         text-align: center
+         color: #fff
+         font-size: 1.3rem
+
+.footer
+   margin-top: -50px
+   padding: 60px 20px 20px
+
+   display: flex
+   justify-content: space-between
+   align-items: center
+
+   background-color: #fff
+   border-radius: 0 0 25px 25px
+   box-shadow: 0 2px 8px rgba(#000, .1)
+
+   & .info
+      display: flex
+      flex-direction: column
+      & .price
+         font-weight: 700
+         font-size: 1.2rem
+      & .sizes
+         display: flex
+         flex-wrap: wrap
+         & .sizeItem
+            cursor: pointer
+            &.checked
+               background-color: $gray-light
+            & > input
+               display: none
+
+
