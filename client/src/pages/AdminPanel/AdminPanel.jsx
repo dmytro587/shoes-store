@@ -1,11 +1,12 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { NavLink, Route } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 import { checkAccess } from '../../redux/actions/auth'
 import { getError, getIsChecked } from '../../redux/selectors/auth'
 
-import { AddProduct, FullscreenLoader, ProductEdit, ProductsList } from '../../components'
+import { AdminRouterConfig } from '../../navigation'
+import { FullscreenLoader } from '../../components'
 
 import * as s from './AdminPanel.module.sass'
 
@@ -59,10 +60,7 @@ const AdminPanel = () => {
          </div>
 
          <div className={ s.body }>
-            <Route exact path="/admin" component={ AddProduct }/>
-            <Route path="/admin/add-product" component={ AddProduct }/>
-            <Route path="/admin/products-list" component={ ProductsList }/>
-            <Route path="/admin/edit/:id" component={ ProductEdit }/>
+            <AdminRouterConfig />
          </div>
       </div>
    )

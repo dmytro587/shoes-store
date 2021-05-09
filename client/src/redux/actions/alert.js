@@ -1,8 +1,8 @@
 import { REMOVE_ALERT, SET_ALERT } from '../actionTypes/alert'
 
-export const removeAlert = {
-   type: REMOVE_ALERT
-}
+// export const removeAlert = {
+//    type: REMOVE_ALERT
+// }
 
 export const setAlert = (msg, alertType = 'success', timeout = 10000) => dispatch => {
    dispatch({

@@ -1,13 +1,12 @@
-import { useEffect, Suspense } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Switch, Route, Redirect } from 'react-router-dom'
 
 import { initializeApp } from './redux/actions/app'
 import { getIsInitialized } from './redux/selectors/app'
 
-import { PrivateRouter, withAppErrorHandling } from './hoc'
+import { withAppErrorHandling } from './hoc'
 import { FullscreenLoader, Header } from './components'
-import { Home, Cart, Auth, ResetPassword, NewPassword, AdminPanel } from './pages'
+import { MainRouterConfig } from './navigation'
 
 const App = () => {
    const dispatch = useDispatch()
@@ -26,17 +25,7 @@ const App = () => {
       <div className="wrapper">
          <Header/>
 
-         <Suspense fallback={ <FullscreenLoader /> }>
-            <Switch>
-               <PrivateRouter exact path="/cart" component={ Cart }/>
-               <Route path="/home" component={ Home }/>
-               <Route path="/auth" component={ Auth }/>
-               <Route path="/admin" component={ AdminPanel }/>
-               <Route path="/reset-password" component={ ResetPassword }/>
-               <Route path="/new-password/:token" component={ NewPassword }/>
-               <Redirect to="/home"/>
-            </Switch>
-         </Suspense>
+         <MainRouterConfig />
       </div>
 )
 }

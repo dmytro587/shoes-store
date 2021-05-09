@@ -6,7 +6,7 @@ import {
 } from '../actionTypes/products'
 import { checkAndSetAppError } from './app'
 import { setAlert } from './alert'
-import { productsAPI } from './../../api'
+import { productsAPI } from './../../services'
 
 const setIsLoading = bool => ({
    type: SET_IS_LOADING,

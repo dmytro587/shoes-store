@@ -6,7 +6,7 @@ import {
    SET_IS_CHECKED
 } from '../actionTypes/auth'
 import { checkAndSetAppError } from './app'
-import { authAPI } from '../../api'
+import { authAPI } from '../../services'
 import { delay, history } from './../../utils'
 import { setAlert } from './alert'
 

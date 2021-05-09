@@ -1,4 +1,4 @@
-import { cartAPI } from '../../api'
+import { cartAPI } from '../../services'
 
 import {
    CLEAR_CART,
