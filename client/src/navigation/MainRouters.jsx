@@ -10,10 +10,10 @@ import {
    NewPassword,
    ResetPassword
 } from '../pages'
-import { main } from './constants'
+import { mainRoutes } from './constants'
 import { PrivateRouter } from './index'
 
-const MainRouterConfig = () => {
+const MainRouters = () => {
    const {
       ADMIN_PANEL,
       AUTH_PAGE,
@@ -21,7 +21,7 @@ const MainRouterConfig = () => {
       HOME,
       NEW_PASSWORD_PAGE,
       RESET_PASSWORD_PAGE
-   } = main
+   } = mainRoutes
 
    return (
       <Suspense fallback={ <FullscreenLoader/> }>
@@ -43,4 +43,4 @@ const MainRouterConfig = () => {
    )
 }
 
-export default MainRouterConfig
+export default MainRouters

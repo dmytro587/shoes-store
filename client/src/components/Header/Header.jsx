@@ -1,3 +1,4 @@
+import React from 'react'
 import { Link, Route, Switch } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -13,7 +14,7 @@ import * as s from './Header.module.sass'
 
 const AuthLink = () => (
    <Link to="/auth/login" className={ s.text }>
-      <Button fill black small>Войти</Button>
+      <Button color="black" small>Войти</Button>
    </Link>
 )
 

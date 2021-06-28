@@ -1,4 +1,4 @@
-export { default as Button } from './common/Button/Button'
+export { default as Button } from './common/Buttons/Button'
 export { default as FormControl } from './common/FormControl/FormControl'
 export { default as Alert } from './common/Alert/Alert'
 export { default as FullscreenLoader } from './common/FullscreenLoader/FullscreenLoader'

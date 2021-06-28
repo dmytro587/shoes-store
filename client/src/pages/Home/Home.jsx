@@ -9,7 +9,6 @@ import { getPriceSort, getSizeSort, getCategorySort, getCurrentPage } from '../.
 import { getError, getIsLoading, getProducts, getTotalPages } from '../../redux/selectors/products'
 import { getIsAuthed } from '../../redux/selectors/auth'
 
-import { ErrorBoundary } from '../../hoc'
 import { ProductLoader, ProductCard, Categories, Sort } from './components'
 import { Sidebar, Pagination } from '../../components'
 
@@ -58,23 +57,24 @@ const Home = () => {
 
    const productsList = products.map(product => {
       return (
-         <ErrorBoundary isEmpty key={ product._id }>
-            <ProductCard
-               id={ product._id }
-               onAddClick={ addToCartHandler }
-               name={ product.name }
-               price={ product.price }
-               imgUrl={ product.imgUrl }
-               sizes={ product.sizes }
-            />
-         </ErrorBoundary>
+         <ProductCard
+            key={ product._id }
+            id={ product._id }
+            onAddClick={ addToCartHandler }
+            name={ product.name }
+            price={ product.price }
+            imgUrl={ product.imgUrl }
+            sizes={ product.sizes }
+         />
       )
    })
 
-   const getContent = () => {
+   const renderContent = () => {
       switch (true) {
          case isLoading:
-            return Array(10).fill('').map((_, index) => <ProductLoader key={ index }/>)
+            return Array(10)
+               .fill('')
+               .map((_, index) => <ProductLoader key={ index }/>)
          case productsList.length > 0:
             return productsList
          case !error:
@@ -94,36 +94,28 @@ const Home = () => {
    return (
       <div className="container">
          <div className={ s.contentTop }>
-            <ErrorBoundary errorMsg="Что-то пошло не так">
-               <Categories
-                  onSelectCategory={ onSelectCategory }
-                  items={ categoryNames }
-                  isLoading={ isLoading }
-               />
-            </ErrorBoundary>
-            <ErrorBoundary errorMsg="Что-то пошло не так">
-               <Sort items={ sortTypes } onSortClick={ onSortClick }/>
-            </ErrorBoundary>
+            <Categories
+               onSelectCategory={ onSelectCategory }
+               items={ categoryNames }
+               isLoading={ isLoading }
+            />
+            <Sort items={ sortTypes } onSortClick={ onSortClick }/>
          </div>
 
          <div className={ s.main }>
-            <ErrorBoundary errorMsg="Что-то пошло не так">
-               <Sidebar/>
-            </ErrorBoundary>
+            <Sidebar/>
 
             <div className={ s.body }>
                <div className={ s.content }>
-                  { getContent() }
+                  { renderContent() }
                </div>
                {
                   productsList.length > 0 ? (
-                     <ErrorBoundary>
-                        <Pagination
-                           currentPage={ currentPage }
-                           totalCount={ totalPages }
-                           onPageClick={ onChangePage }
-                        />
-                     </ErrorBoundary>
+                     <Pagination
+                        currentPage={ currentPage }
+                        totalCount={ totalPages }
+                        onPageClick={ onChangePage }
+                     />
                   ) : null
                }
             </div>

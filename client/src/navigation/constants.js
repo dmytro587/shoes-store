@@ -1,5 +1,5 @@
 // main routes
-export const main = {
+export const mainRoutes = {
    HOME: '/home',
    AUTH_PAGE: '/auth',
    ADMIN_PANEL: '/admin',
@@ -9,9 +9,10 @@ export const main = {
 }
 
 // admin routes
-export const admin = {
+export const adminRoutes = {
    ROOT: '/admin',
    ADD_PRODUCT: '/admin/add-product',
    PRODUCTS_LIST: '/admin/products-list',
    EDIT_PRODUCT: '/admin/edit/:id'
 }
+

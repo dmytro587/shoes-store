@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@chec/commerce.js": "^2.3.1",
     "@reduxjs/toolkit": "^1.5.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -15,7 +14,6 @@
     "node-sass": "4.14.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
-    "react-content-loader": "^6.0.1",
     "react-dom": "^17.0.1",
     "react-final-form": "^6.5.2",
     "react-loader-spinner": "^4.0.0",

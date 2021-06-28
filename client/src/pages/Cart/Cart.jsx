@@ -118,7 +118,7 @@ const Cart = () => {
                      Вернуться назад
                   </Button>
                </Link>
-               <Button fill>Оплатить сейчас</Button>
+               <Button>Оплатить сейчас</Button>
             </div>
          </div>
       </div>

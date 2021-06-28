@@ -7,7 +7,6 @@ import { Alert, FormControl, Button } from '../../components'
 
 import * as s from './ResetPassword.module.sass'
 
-
 const validate = values => {
    const errors = {}
 
@@ -40,7 +39,7 @@ const ResetPassword = () => {
 
                <FormControl label="Email" name="email" type="email" className={ s.input } />
 
-               <Button type="submit" fill black small>Продолжить</Button>
+               <Button type="submit" color="black" small>Продолжить</Button>
             </form>
          ) }
       />

@@ -1,4 +1,4 @@
-import { instance } from './api'
+import { instance } from './APIUtils'
 import { delay } from '../utils'
 
 const productsAPI = {

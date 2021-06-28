@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 import { checkAccess } from '../../redux/actions/auth'
 import { getError, getIsChecked } from '../../redux/selectors/auth'
 
-import { AdminRouterConfig } from '../../navigation'
+import { AdminRouters } from '../../navigation'
 import { FullscreenLoader } from '../../components'
 
 import * as s from './AdminPanel.module.sass'
@@ -60,7 +60,7 @@ const AdminPanel = () => {
          </div>
 
          <div className={ s.body }>
-            <AdminRouterConfig />
+            <AdminRouters />
          </div>
       </div>
    )

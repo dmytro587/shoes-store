@@ -19,30 +19,30 @@ class ErrorBoundary extends Component {
    }
 
    render() {
-      const { errorMsg, FallbackComponent, isEmpty, pageRender } = this.props
+      const { errorMsg, FallbackComponent, empty, pageRender, children } = this.props
+      const { hasError, error } = this.state
 
-      if (this.state.hasError) {
-         const error = errorMsg || this.state.error.message
+      if (hasError) {
+         const err = error.message || errorMsg || 'Что-то пошло не так'
 
-         if (isEmpty) return null
-
-         if (FallbackComponent) {
-            return <FallbackComponent error={ error } />
+         switch (true) {
+            case empty:
+               return null
+            case FallbackComponent:
+               return <FallbackComponent error={ err } />
+            case pageRender:
+               return (
+                  <div className={ s.wrapper }>
+                     <h1>Что-то пошло не так, попробуйте позже</h1>
+                     <p>Ошибка: { err }</p>
+                  </div>
+               )
+            default:
+               return <p>{ err }</p>
          }
-
-         if (pageRender) {
-            return (
-               <div className={ s.wrapper }>
-                  <h1>Что-то пошло не так, попробуйте позже</h1>
-                  <p>Ошибка: { error }</p>
-               </div>
-            )
-         }
-
-         return <p>{ error }</p>
       }
 
-      return this.props.children
+      return children
    }
 }
 

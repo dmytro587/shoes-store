@@ -43,7 +43,7 @@ const NewPassword = () => {
                <FormControl label="Новый пароль" name="password" type="password" className={ s.input } />
                <FormControl label="Повторите пароль" name="confirm" type="password" className={ s.input } />
 
-               <Button type="submit" fill black small>Сохранить</Button>
+               <Button type="submit" color="black" small>Сохранить</Button>
             </form>
          ) }
       />

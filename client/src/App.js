@@ -6,7 +6,7 @@ import { getIsInitialized } from './redux/selectors/app'
 
 import { withAppErrorHandling } from './hoc'
 import { FullscreenLoader, Header } from './components'
-import { MainRouterConfig } from './navigation'
+import { MainRouters } from './navigation'
 
 const App = () => {
    const dispatch = useDispatch()
@@ -25,7 +25,7 @@ const App = () => {
       <div className="wrapper">
          <Header/>
 
-         <MainRouterConfig/>
+         <MainRouters/>
       </div>
    )
 }

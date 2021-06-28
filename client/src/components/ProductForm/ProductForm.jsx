@@ -51,10 +51,21 @@ const ProductForm = ({ onSubmit = noop, submitButtonText, initialValues }) => {
                   placeholder="Выбрать..."
                />
 
-               <Button type="submit" fill black small className={ s.button } disabled={ submitting || pristine }>
+               <Button
+                  type="submit"
+                  color="black"
+                  small
+                  className={ s.button } disabled={ submitting || pristine }
+               >
                   { submitButtonText || 'Отправить' }
                </Button>
-               <Button type="button" onClick={ form.reset } outline small disabled={ pristine }>
+               <Button
+                  type="button"
+                  onClick={ form.reset }
+                  outline
+                  small
+                  disabled={ pristine }
+               >
                   Сбросить
                </Button>
             </form>

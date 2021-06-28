@@ -11,7 +11,7 @@ const EmptyCart = () => {
          <h1>Корзина пустая 😕</h1>
          <img src={ emptySvg } alt=""/>
          <Link to="/home">
-            <Button black fill>Вернуться назад</Button>
+            <Button color="black">Вернуться назад</Button>
          </Link>
       </div>
    )

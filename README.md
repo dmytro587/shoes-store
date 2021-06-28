@@ -3,7 +3,34 @@
 * email: test@mail.ru
 * password: test
 
-## Run the project
-### `npm run dev`
-Runs the app in the development mode. \
-Open http://localhost:3000/home to view it in the browser.
+# Getting started
+To get the frontend running locally:
+
+- Clone this repo
+- npm run install to install all required dependencies
+- npm run dev to start the local server
+
+## Stack
+### Frontend
+- React
+- Redux
+- React-select
+- Final-form
+- Classnames
+- React-loader-spinner
+- Axios
+
+### Backend
+- Express.js
+- mongoose
+- bcrypt
+- express-validator
+- helmet
+- jsonwebtoken
+- nodemailer
+- nodemon
+- cors
+- dotenv
+
+### Database
+- MongoDB

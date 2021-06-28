@@ -1,23 +1,18 @@
-import { useState } from 'react'
 import { useSelector } from 'react-redux'
+import Loader from 'react-loader-spinner'
 
 import { getAddingState } from '../../../../redux/selectors/cart'
+import withErrorBoundary from '../../../../hoc/withErrorBoundary'
 
-import Loader from 'react-loader-spinner'
 import { Button } from '../../../../components'
 import SizesList from '../SizesList/SizesList'
 
 import * as s from './ProductCard.module.sass'
 
-
-const ProductCard = ({ id, name, price, imgUrl, sizes, onAddClick, count }) => {
-   const [counter, setCounter] = useState(count?.count || count)
+const ProductCard = ({ id, name, price, imgUrl, sizes, onAddClick }) => {
    const addingState = useSelector(getAddingState)
 
-   const addHandler = () => {
-      onAddClick(id)
-      setCounter(prev => prev + 1)
-   }
+   const addHandler = () => onAddClick(id)
 
    return (
       <div>
@@ -35,9 +30,7 @@ const ProductCard = ({ id, name, price, imgUrl, sizes, onAddClick, count }) => {
             </div>
 
             <Button
-               fill
                small
-               quantity={ counter > 0 && counter }
                className={s.btn}
                onClick={ addHandler }
             >
@@ -71,4 +64,4 @@ const ProductCard = ({ id, name, price, imgUrl, sizes, onAddClick, count }) => {
    )
 }
 
-export default ProductCard
+export default withErrorBoundary(ProductCard)

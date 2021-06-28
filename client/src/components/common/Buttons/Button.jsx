@@ -3,21 +3,18 @@ import * as s from './Button.module.sass'
 
 const Button = ({
     children,
-    fill,
     outline,
-    quantity,
-    onClick,
-    black,
+    color,
     small,
     className,
-   ...rest
+    onClick,
+    ...rest
 }) => (
    <button
       className={
-         cn(s.button, className, {
+         cn(s.button, s.fill, className, {
             [s.outline]: !!outline,
-            [s.fill]: !!fill,
-            [s.black]: !!black,
+            [s[color]]: !!color,
             [s.small]: !!small
          })
       }
@@ -25,11 +22,6 @@ const Button = ({
       { ...rest }
    >
       { children }
-      {
-         (quantity && quantity > 0)
-            ? <span className={ s.quantity }>{ quantity }</span>
-            : null
-      }
    </button>
 )
 

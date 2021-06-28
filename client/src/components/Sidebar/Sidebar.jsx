@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux'
 
 import { setSortByPrice, setSortBySize } from '../../redux/actions/filters'
 import { PriceForm, SizeForm } from './components'
+import withErrorBoundary from '../../hoc/withErrorBoundary'
 
 import * as s from './Sidebar.module.sass'
 
@@ -34,4 +35,4 @@ const Sidebar = () => {
    )
 }
 
-export default Sidebar
+export default withErrorBoundary(Sidebar)

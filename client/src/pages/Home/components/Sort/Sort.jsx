@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import cn from 'classnames'
 
+import withErrorBoundary from '../../../../hoc/withErrorBoundary'
+
 import arrowSvg from './../../../../assets/images/popup-arrow.svg'
 import * as s from './Sort.module.sass'
 
@@ -29,7 +31,7 @@ const Sort = ({ items, onSortClick }) => {
       setIsActive(!isActive)
    }
 
-   const sortItems = items.map((obj, index) => (
+   const renderItems = () => items.map((obj, index) => (
       <li
          key={ obj.name }
          className={ cn({ [s.active]: activeItem === index }) }
@@ -50,11 +52,11 @@ const Sort = ({ items, onSortClick }) => {
 
          { isActive && (
             <ul className={ s.popup } ref={ popupRef }>
-               { sortItems }
+               { renderItems() }
             </ul>
          ) }
       </div>
    )
 }
 
-export default Sort
+export default withErrorBoundary(Sort)

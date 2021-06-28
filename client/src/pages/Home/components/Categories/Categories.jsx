@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import cn from 'classnames'
 
+import withErrorBoundary from '../../../../hoc/withErrorBoundary'
+
 import * as s from './Categories.module.sass'
 
 const Categories = ({ items, isLoaded, onSelectCategory }) => {
@@ -31,4 +33,4 @@ const Categories = ({ items, isLoaded, onSelectCategory }) => {
    )
 }
 
-export default Categories
+export default withErrorBoundary(Categories)

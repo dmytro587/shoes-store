@@ -1,7 +1,8 @@
 import cn from 'classnames'
+import withErrorBoundary from '../../hoc/withErrorBoundary'
 import * as s from './Pagination.module.sass'
 
-const range = (from, to) => {
+const getRange = (from, to) => {
    const res = []
 
    for (let i = from; i <= to; i++) {
@@ -16,8 +17,8 @@ const getPagination = (totalCount, currentPage) => {
    const endPages = []
 
    if (totalCount >= 10) {
-      startPages.push(...range(1, 3))
-      endPages.push(...range(totalCount, totalCount - 3))
+      startPages.push(...getRange(1, 3))
+      endPages.push(...getRange(totalCount, totalCount - 3))
    }
 
    const pageNeighbours = 1
@@ -131,4 +132,4 @@ const Pagination = ({ totalCount, currentPage, onPageClick, className }) => {
    )
 }
 
-export default Pagination
+export default withErrorBoundary(Pagination)

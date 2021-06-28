@@ -25,7 +25,7 @@ const RegistrationForm = ({ onSubmit}) => {
                <FormControl label="Пароль" name="password" type="password" />
                <FormControl label="Повторите пароль" name="confirm" type="password" />
 
-               <Button type="submit" fill black small>Зарегистрироваться</Button>
+               <Button type="submit" color="black" small>Зарегистрироваться</Button>
             </form>
          ) }
       />

@@ -8,6 +8,10 @@ const categoriesValidator = async value => {
    return value.some(elem => typeof elem === 'string')
 }
 
+const priceValidator = async value => {
+   if (Math.trunc(+value) !== +value) return Promise.reject('Цена должна быть целым числом')
+}
+
 module.exports = [
    body('name')
       .isLength({ min: 10, max: 50 })
@@ -19,7 +23,8 @@ module.exports = [
       .trim(),
    body('price')
       .isNumeric()
-      .withMessage('Введите корректную цену'),
+      .withMessage('Введите корректную цену')
+      .custom(priceValidator),
    body('sizes')
       .isArray({ min: 1 })
       .custom(sizesValidator),

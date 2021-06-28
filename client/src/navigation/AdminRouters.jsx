@@ -1,15 +1,15 @@
 import { Route, Switch } from 'react-router-dom'
 
 import { AddProduct, ProductEdit, ProductsList } from '../components'
-import { admin } from './constants'
+import { adminRoutes } from './constants'
 
-const AdminRouterConfig = () => {
+const AdminRouters = () => {
    const {
       ROOT,
       ADD_PRODUCT,
       PRODUCTS_LIST,
       EDIT_PRODUCT
-   } = admin
+   } = adminRoutes
 
    return (
       <Switch>
@@ -21,4 +21,4 @@ const AdminRouterConfig = () => {
    )
 }
 
-export default AdminRouterConfig
+export default AdminRouters

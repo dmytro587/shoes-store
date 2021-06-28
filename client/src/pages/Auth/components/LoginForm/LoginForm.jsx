@@ -29,7 +29,7 @@ const LoginForm = ({ onSubmit }) => {
                   Забыли пароль?
                </Link>
 
-               <Button type="submit" fill black small>Войти</Button>
+               <Button type="submit" color="black" small>Войти</Button>
             </form>
          ) }
       />
