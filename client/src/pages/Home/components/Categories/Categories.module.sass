@@ -10,12 +10,16 @@
    color: $black
    background-color: $gray-ultra-light
 
-   text-decoration: none
    transition: background-color .2s ease
    cursor: pointer
+   & > a
+      color: inherit
+      text-decoration: none
    &:disabled
       background-color: darken($gray-ultra-light, 8%)
       cursor: not-allowed
+      & > *
+         cursor: not-allowed
 
    &:focus, &:active
       border-radius: 25px

@@ -11,6 +11,7 @@ const {
 
 const { admin: adminRole } = require('../../config/roles')
 
+
 router.get('/check-auth', checkAuth, auth.autoLogin)
 router.get('/check-access', checkRole([adminRole]), auth.checkAccess)
 

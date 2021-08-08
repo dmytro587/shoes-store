@@ -20,6 +20,12 @@ require('./models/User')
 // Routes
 app.use('/api', require('./routes'))
 
+// Error handler
+// app.use((err, req, res, next) => {
+//    console.error(err.stack)
+//    res.status(500).send('Что-то пошло не так')
+// })
+
 // Mongoose connection
 mongoose.connect(
    MONGODB_URI, {

@@ -1,9 +1,0 @@
-export const ADD_PRODUCT_TO_CART = 'cart/ADD_PRODUCT_TO_CART'
-export const SET_REMOVING_STATE = 'cart/SET_REMOVING_STATE'
-export const CLEAR_CART = 'cart/CLEAR_CART'
-export const FETCH_CART_SUCCESS = 'cart/FETCH_CART_SUCCESS'
-export const FETCH_CART_INFO_SUCCESS = 'cart/FETCH_CART_INFO_SUCCESS'
-export const SET_IS_LOADED = 'cart/SET_IS_LOADED'
-export const SET_ADDING_STATE = 'cart/SET_ADDING_STATE'
-
-

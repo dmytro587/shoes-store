@@ -148,14 +148,14 @@ exports.newPassword = async (req, res) => {
    }
 
    try {
-      const { token, password } = req.body
+      const { token, newPassword } = req.body
       const user = await User.findOne({
          resetToken: token,
          resetTokenExp: { $gt: Date.now() }
       })
 
       if (user) {
-         user.password = await bcrypt.hash(password, 12)
+         user.password = await bcrypt.hash(newPassword, 12)
          user.resetToken = null
          user.resetTokenExp = null
 
