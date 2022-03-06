@@ -6,7 +6,7 @@ import { Router } from 'react-router-dom'
 import { history, noScrollbarListener } from '@utils'
 import store from '@redux/store'
 
-import { ErrorBoundary } from './hoc'
+import { ErrorBoundary } from '@components'
 import App from './App'
 
 import './sass/index.sass'

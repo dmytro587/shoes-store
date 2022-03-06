@@ -25,7 +25,7 @@ const FormControl: React.FC<Props> = ({
       <Field name={ name }>
          { ({ input, meta }) => (
             <div className={ s.fieldWrapper }>
-               <label className={ s.label }>{ label ? `${ label }:` : null }</label>
+               <label className={ s.label }>{ label }</label>
 
                {
                   Component

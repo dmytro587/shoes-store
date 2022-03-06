@@ -19,7 +19,7 @@ import {
 
 import { Button } from '@components'
 import { CartItem, CartItemLoader, EmptyCart } from './components'
-import { ErrorBoundary } from '@hoc'
+import { ErrorBoundary } from '@components'
 
 import grayLogoSvg from '@assets/images/gray-basket.svg'
 import trashSvg from '@assets/images/trash.svg'
